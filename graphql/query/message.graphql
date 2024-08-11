@@ -1,0 +1,17 @@
+query getMessages {
+  messages {
+    id
+    user
+    text
+    createdAt
+  }
+}
+
+mutation postMessage($user: String!, $text: String!) {
+  postMessage(user: $user, text: $text) {
+    id
+    user
+    text
+    createdAt
+  }
+}
