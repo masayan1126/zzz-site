@@ -1,6 +1,7 @@
-"use client";
+// "use client";
 
 import { GET_USERS } from "@/gql/queries/userQueries";
+import { getClient } from "@/lib/apolloClient";
 import { useQuery } from "@apollo/client";
 
 // async function fetchUserData() {
@@ -11,9 +12,12 @@ import { useQuery } from "@apollo/client";
 //   }
 //   return response.json();
 // }
-export function UserList() {
+export async function UserList() {
   //   const user = await fetchUserData();
-  const { loading, error, data } = useQuery(GET_USERS);
+  //   const { loading, error, data } = useQuery(GET_USERS);
+  const { data, loading, error } = await getClient().query({
+    query: GET_USERS,
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -21,8 +25,8 @@ export function UserList() {
   console.log(data["test"][0]["id"]);
   return (
     <div>
-      {/* <h1>Welcome, {user.name}</h1>
-      <p>Email: {user.email}</p> */}
+      <h1>Welcome, {data["test"][0]["id"]}</h1>
+      <p>Email: {data["test"][0]["id"]}</p>
     </div>
   );
 }

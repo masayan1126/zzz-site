@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@/features/auth/UserProvider";
-import { QueryProvider } from "@/features/auth/QueryProvider";
+import { ApolloWrapper } from "@/features/auth/ApolloWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <QueryProvider>
+      <ApolloWrapper>
         <UserProvider>
           <body className={inter.className}>
             <header>ヘッダー</header>
@@ -26,7 +26,7 @@ export default function RootLayout({
             <footer>フッター</footer>
           </body>
         </UserProvider>
-      </QueryProvider>
+      </ApolloWrapper>
     </html>
   );
 }
