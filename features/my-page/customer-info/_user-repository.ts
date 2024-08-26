@@ -1,23 +1,43 @@
-import {
-  UserDocument,
-  UserQuery,
-  UsersDocument,
-  UsersQuery,
-} from "@/gql/graphql";
+import { graphql } from "@/gql";
+import { UserQuery } from "@/gql/graphql";
 import { getClient } from "@/lib/apolloClient";
 
 export class UserRepository {
   static async searchUsers() {
-    const { data, loading, error } = await getClient().query<UsersQuery>({
-      query: UsersDocument,
+    const UsersQueryDocument = graphql(
+      `
+        query Users {
+          users {
+            id
+            name
+            age
+          }
+        }
+      `
+    );
+
+    const { data, loading, error } = await getClient().query({
+      query: UsersQueryDocument,
     });
 
     return { users: data.users, loading, error };
   }
 
   static async findUser(id: string) {
+    const UserQueryDocument = graphql(
+      `
+        query User($id: ID!) {
+          user(id: $id) {
+            id
+            name
+            age
+          }
+        }
+      `
+    );
+
     const { data, loading, error } = await getClient().query<UserQuery>({
-      query: UserDocument,
+      query: UserQueryDocument,
       variables: { id },
     });
 
