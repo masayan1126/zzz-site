@@ -6,4 +6,5 @@ export const agentBreakThroughMaterials = [
   { level: 30, material: { A: 0, B: 32, C: 4 } },
   { level: 40, material: { A: 10, B: 32, C: 4 } },
   { level: 50, material: { A: 30, B: 32, C: 4 } },
+  { level: 60, material: { A: 30, B: 32, C: 4 } },
 ];

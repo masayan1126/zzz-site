@@ -21,6 +21,15 @@ import CoreSkillLevelSelectBox from "@/shared/components/CoreSkillLevelSelectBox
 import InfoIcon from "@mui/icons-material/Info";
 import { agentBreakThroughDinnies } from "@/features/agent-traning-calculator/constants/dinny";
 import { DinnyCalculator } from "@/features/agent-traning-calculator/dinny-calculator";
+import { agentExperiencePoints } from "@/features/agent-traning-calculator/constants/experience-point";
+import { agentBreakThroughMaterials } from "@/features/agent-traning-calculator/constants/material";
+import { AgentBreakThroughMaterialAmountCalculator } from "@/features/agent-traning-calculator/agent-breack-through-material-amount-calculator";
+
+type totalAgentBreakThroughMaterialAmount = {
+  A: number;
+  B: number;
+  C: number;
+};
 
 export default function Home() {
   const [selectedLevel, setSelectedLevel] = useState<number>(60);
@@ -30,6 +39,14 @@ export default function Home() {
 
   const [needDinnyAmount, setNeedDinnyAmount] = useState<string>("0");
   const [needBatteryForDinny, setNeedBatteryForDinny] = useState<number>(0);
+  const [
+    needAgentBreakThroughMaterialAmount,
+    setNeedAgentBreakThroughMaterialAmount,
+  ] = useState<totalAgentBreakThroughMaterialAmount>({
+    A: 0,
+    B: 0,
+    C: 0,
+  });
 
   const handleChange = (event: SelectChangeEvent<number>) => {
     if (Number(event.target.value) === 60) {
@@ -67,12 +84,6 @@ export default function Home() {
     setNeedBatteryForDinny(0);
   };
 
-  //   new DinnyCalculator().calculate(
-  //     selectedLevel,
-  //     selectedCoreSkillLevel,
-  //     isBreakThrough
-  //   )
-
   useEffect(() => {
     const needDinneyAmount = new DinnyCalculator().calculate(
       selectedLevel,
@@ -92,6 +103,13 @@ export default function Home() {
           isBreakThrough,
           false
         )
+      )
+    );
+
+    setNeedAgentBreakThroughMaterialAmount(
+      new AgentBreakThroughMaterialAmountCalculator().calculate(
+        selectedLevel,
+        isBreakThrough
       )
     );
   }, [selectedLevel, selectedCoreSkillLevel, isBreakThrough]);
@@ -153,21 +171,6 @@ export default function Home() {
 
         {/* <Table /> */}
 
-        {/* <h3>必要なエージェントの突破素材：</h3>
-{agentBreakThroughMaterials.map((agentMaterial) => {
-  if (agentMaterial.level === selectedLevel) {
-    return (
-      <div key={agentMaterial.level}>
-        <p>レベル：{agentMaterial.level}</p>
-        <p>素材A：{agentMaterial.material.A}</p>
-        <p>素材B：{agentMaterial.material.B}</p>
-        <p>素材C：{agentMaterial.material.C}</p>
-      </div>
-    );
-  }
-})}
-<hr /> */}
-
         <Typography variant="h6">必要なディニーの総額</Typography>
 
         {agentBreakThroughDinnies.map((agentBreakThroughDinny) => {
@@ -186,42 +189,6 @@ export default function Home() {
             );
           }
         })}
-        {/* <h3>必要な経験値素材（調査員の記録）：</h3>
-        
-<hr />
-<h4>小計</h4>
-{agentExperiencePoints.map((agentExperiencePoint) => {
-  if (selectedLevel == agentExperiencePoint.level.to) {
-    return (
-      <div key={agentExperiencePoint.level.from}>
-        <p>経験値：{agentExperiencePoint.amount.subtotal}</p>
-        <p>素材（A）:{agentExperiencePoint.material.subtotal.A}</p>
-      </div>
-    );
-  }
-})}
-<hr /> */}
-        {/* <Typography variant="h4">合計</Typography>
-{agentExperiencePoints.map((agentExperiencePoint) => {
-  if (selectedLevel == agentExperiencePoint.level.to) {
-    return (
-      <div key={agentExperiencePoint.level.from}>
-        <p>経験値：{agentExperiencePoint.amount.total}</p>
-        <p>素材（A）:{agentExperiencePoint.material.total.A}</p>
-      </div>
-    );
-  }
-})}
-<hr /> */}
-        {/* <h3>必要なスタミナ（目安）：</h3>
-<hr />
-<h3>入手できる場所：</h3> */}
-
-        {/* <Typography variant="h5">育成予備知識</Typography>
-
-        <Typography variant="caption">
-          ・ディニーは突破時（突破時のみ必要。レベル上げてる時は不要）とコアスキル上げる時に必要
-        </Typography> */}
 
         <Typography variant="caption">
           {/* スタミナ100でディニーは125,000 */}
@@ -230,6 +197,63 @@ export default function Home() {
           このディニーを稼ぐために必要なバッテリーの消費量：
           {needBatteryForDinny}
         </Typography>
+        <hr />
+        <Typography variant="h6">必要な経験値素材（調査員の記録）</Typography>
+        <Typography variant="caption">
+          必要なA級素材の数と、経験値数を表示しています
+        </Typography>
+
+        {/* <hr /> */}
+        {/* <h4>小計</h4> */}
+        {/* {agentExperiencePoints.map((agentExperiencePoint) => {
+          if (selectedLevel == agentExperiencePoint.level.to) {
+            return (
+              <div key={agentExperiencePoint.level.from}>
+                <p>素材（A級）:{agentExperiencePoint.material.subtotal.A}</p>
+                <p>経験値：{agentExperiencePoint.amount.subtotal}</p>
+              </div>
+            );
+          }
+        })}
+        <hr /> */}
+
+        {agentExperiencePoints.map((agentExperiencePoint) => {
+          if (selectedLevel == agentExperiencePoint.level.to) {
+            return (
+              <div key={agentExperiencePoint.level.from}>
+                <p>
+                  経験値：{agentExperiencePoint.amount.total.toLocaleString()}
+                </p>
+                <p>素材（A級）:{agentExperiencePoint.material.total.A}個</p>
+              </div>
+            );
+          }
+        })}
+        <hr />
+        <Typography variant="h6">必要なエージェントの突破素材</Typography>
+        <Typography variant="caption">
+          必要な突破素材の数を表示しています
+        </Typography>
+
+        {agentBreakThroughMaterials.map((agentMaterial) => {
+          if (agentMaterial.level === selectedLevel) {
+            return (
+              <div key={agentMaterial.level}>
+                <p>A級突破素材：{needAgentBreakThroughMaterialAmount.A}個</p>
+                <p>B級突破素材：{needAgentBreakThroughMaterialAmount.B}個</p>
+                <p>C級突破素材：{needAgentBreakThroughMaterialAmount.C}個</p>
+              </div>
+            );
+          }
+        })}
+
+        {/* <h3>入手できる場所：</h3> */}
+
+        {/* <Typography variant="h5">育成予備知識</Typography>
+
+        <Typography variant="caption">
+          ・ディニーは突破時（突破時のみ必要。レベル上げてる時は不要）とコアスキル上げる時に必要
+        </Typography> */}
 
         <Button
           variant="contained"
