@@ -53,7 +53,7 @@ export default function Home() {
     setSelectedCoreSkillLevel(event.target.value);
   };
 
-  const calcNeedBatteryForDinny = (dinny: number | string) => {
+  const calcNeedBatteryForDinny = (dinny) => {
     if (typeof dinny === "string") {
       Error("ディニーの金額が数値ではありません");
     }
