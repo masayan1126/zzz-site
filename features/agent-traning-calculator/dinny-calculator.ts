@@ -4,13 +4,18 @@ import {
   agentSkillDinnies,
 } from "@/features/agent-traning-calculator/constants/dinny";
 
+type SkillLevelCondition = {
+  normalAttackSkillLevel: number;
+  avoidanceSkillLevel: number;
+};
+
 export class DinnyCalculator {
   public calculate(
     level: number,
     coreSkillLevel: string,
     containBreakThrough: boolean,
     withComma: boolean = true,
-    skillLevelCondition: object
+    skillLevelCondition: SkillLevelCondition
   ) {
     let total_need_dinny = 0;
 
