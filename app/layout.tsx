@@ -4,6 +4,7 @@ import "./globals.css";
 import { UserProvider } from "@/features/auth/UserProvider";
 import { ApolloWrapper } from "@/features/auth/ApolloWrapper";
 import MenuAppBar from "@/features/shared/Navbar";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +18,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const GA_ID = process.env.NEXT_PUBLIC_GA_ID || "";
+
   return (
     <html lang="ja">
+      <head>
+        <GoogleAnalytics gaId={GA_ID} />
+      </head>
       <ApolloWrapper>
         <UserProvider>
           <body className={inter.className}>
