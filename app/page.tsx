@@ -348,9 +348,6 @@ export default function Home() {
         })}
 
         <Typography variant="caption">
-          {/* スタミナ100でディニーは125,000 */}
-          {/* スタミナ60でディニーは75,000 */}
-          {/* スタミナ1につき、1,250 */}
           このディニーを稼ぐために必要なバッテリーの消費量：
           {needBatteryForDinny}
         </Typography>
@@ -359,20 +356,6 @@ export default function Home() {
         <Typography variant="caption">
           必要なA級素材の数と、経験値数を表示しています
         </Typography>
-
-        {/* <hr /> */}
-        {/* <h4>小計</h4> */}
-        {/* {agentExperiencePoints.map((agentExperiencePoint) => {
-          if (selectedLevel == agentExperiencePoint.level.to) {
-            return (
-              <div key={agentExperiencePoint.level.from}>
-                <p>素材（A級）:{agentExperiencePoint.material.subtotal.A}</p>
-                <p>経験値：{agentExperiencePoint.amount.subtotal}</p>
-              </div>
-            );
-          }
-        })}
-        <hr /> */}
 
         {agentExperiencePoints.map((agentExperiencePoint) => {
           if (selectedLevel == agentExperiencePoint.level.to) {
@@ -412,6 +395,10 @@ export default function Home() {
           ・ディニーは突破時（突破時のみ必要。レベル上げてる時は不要）とコアスキル上げる時に必要
         </Typography> */}
 
+        {/* スタミナ100でディニーは125,000 */}
+        {/* スタミナ60でディニーは75,000 */}
+        {/* スタミナ1につき、1,250 */}
+
         <div className="flex gap-2">
           <Button
             variant="contained"
@@ -440,9 +427,9 @@ export default function Home() {
 
         <Typography variant="h5">機能追加予定</Typography>
         <Typography variant="caption">
-          ・必要なキャラのエキスパート素材、週ボス素材、経験値素材、スキルレベル素材、突破素材
+          ・必要なキャラのエキスパート素材、週ボス素材。必要なバッテリーの消費量
         </Typography>
-        <Typography variant="caption">・音同期育成</Typography>
+        <Typography variant="caption">・音同期育成の計算</Typography>
       </Box>
     </main>
   );

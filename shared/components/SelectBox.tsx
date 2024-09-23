@@ -16,14 +16,16 @@ export default function SelectBox({ selectedLevel, handleChange }: Props) {
   return (
     <>
       <FormControl fullWidth={false}>
-        <InputLabel id="demo-simple-select-label">レベル</InputLabel>
+        <InputLabel id="demo-simple-select-label">
+          エージェントのレベル
+        </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={selectedLevel}
           label="レベル"
           onChange={handleChange}
-          sx={{ width: "100px" }}
+          sx={{ width: "160px" }}
         >
           <MenuItem value={0}>0</MenuItem>
           <MenuItem value={10}>10</MenuItem>
