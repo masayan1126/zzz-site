@@ -100,15 +100,24 @@ export default function Home() {
     setSelectedLevel(60);
     setIsBreakThrough(false);
     setSelectedCoreSkillLevel("");
+    setSelectedNormalAttackSkillLevel(1);
+    setSelectedAvoidanceSkillLevel(1);
     setNeedDinnyAmount("0");
     setNeedBatteryForDinny(0);
   };
 
   useEffect(() => {
-    const skillLevelCondition = {
-      normalAttackSkillLevel: selectedNormalAttackSkillLevel,
-      avoidanceSkillLevel: selectedAvoidanceSkillLevel,
-    };
+    let skillLevelCondition = undefined;
+
+    if (
+      selectedNormalAttackSkillLevel !== 1 ||
+      selectedAvoidanceSkillLevel !== 1
+    ) {
+      skillLevelCondition = {
+        normalAttackSkillLevel: selectedNormalAttackSkillLevel,
+        avoidanceSkillLevel: selectedAvoidanceSkillLevel,
+      };
+    }
 
     const needDinneyAmount = new DinnyCalculator().calculate(
       selectedLevel,
