@@ -5,3 +5,22 @@
 .page-title {
   font-size: 34px;
 }
+
+main {
+  padding: 40px 30px;
+  height: 80vh;
+}
+
+header {
+  height: 7vh;
+}
+
+footer {
+  padding: 20px 30px;
+  background-color: #101214;
+  color: #fff;
+  height: 13vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

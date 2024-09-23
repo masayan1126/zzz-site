@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@/features/auth/UserProvider";
 import { ApolloWrapper } from "@/features/auth/ApolloWrapper";
+import MenuAppBar from "@/features/shared/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +22,11 @@ export default function RootLayout({
       <ApolloWrapper>
         <UserProvider>
           <body className={inter.className}>
-            <header>ヘッダー</header>
+            <header>
+              <MenuAppBar />
+            </header>
             {children}
-            <footer>フッター</footer>
+            <footer>© {new Date().getFullYear()} zzz masayan</footer>
           </body>
         </UserProvider>
       </ApolloWrapper>
