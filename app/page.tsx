@@ -11,6 +11,7 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
+  SelectChangeEvent,
   Snackbar,
   Tooltip,
   Typography,
@@ -30,7 +31,7 @@ export default function Home() {
   const [needDinnyAmount, setNeedDinnyAmount] = useState<number>(0);
   const [needBatteryForDinny, setNeedBatteryForDinny] = useState<number>(0);
 
-  const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleChange = (event: SelectChangeEvent<number>) => {
     if (Number(event.target.value) === 60) {
       setIsBreakThrough(false);
     }
@@ -47,9 +48,7 @@ export default function Home() {
     setIsBreakThrough(!isBreakThrough);
   };
 
-  const handleSelectedCoreSkillLevel = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
+  const handleSelectedCoreSkillLevel = (event: SelectChangeEvent<string>) => {
     setSelectedCoreSkillLevel(event.target.value);
   };
 
@@ -148,8 +147,8 @@ export default function Home() {
         </div>
 
         <CoreSkillLevelSelectBox
-          selectedLevel={selectedCoreSkillLevel}
-          handleChange={handleSelectedCoreSkillLevel}
+          selectedCoreSkillLevel={selectedCoreSkillLevel}
+          handleSelectedCoreSkillLevel={handleSelectedCoreSkillLevel}
         />
 
         {/* <Table /> */}

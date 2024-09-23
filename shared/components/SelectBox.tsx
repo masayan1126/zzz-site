@@ -4,9 +4,15 @@ import {
   MenuItem,
   NativeSelect,
   Select,
+  SelectChangeEvent,
 } from "@mui/material";
 
-export default function SelectBox({ selectedLevel, handleChange }) {
+type Props = {
+  selectedLevel: number;
+  handleChange: (event: SelectChangeEvent<number>) => void;
+};
+
+export default function SelectBox({ selectedLevel, handleChange }: Props) {
   return (
     <>
       <FormControl fullWidth={false}>

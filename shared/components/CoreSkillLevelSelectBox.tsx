@@ -4,12 +4,18 @@ import {
   MenuItem,
   NativeSelect,
   Select,
+  SelectChangeEvent,
 } from "@mui/material";
 
+type Props = {
+  selectedCoreSkillLevel: string;
+  handleSelectedCoreSkillLevel: (event: SelectChangeEvent<string>) => void;
+};
+
 export default function CoreSkillLevelSelectBox({
-  selectedLevel,
-  handleChange,
-}) {
+  selectedCoreSkillLevel,
+  handleSelectedCoreSkillLevel,
+}: Props) {
   return (
     <>
       <FormControl fullWidth={false}>
@@ -17,9 +23,9 @@ export default function CoreSkillLevelSelectBox({
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={selectedLevel}
+          value={selectedCoreSkillLevel}
           label=""
-          onChange={handleChange}
+          onChange={handleSelectedCoreSkillLevel}
           sx={{ width: "200px" }}
         >
           <MenuItem value="">指定しない</MenuItem>
