@@ -38,7 +38,7 @@ export default function Home() {
   };
 
   const handleIsBreakThroughChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement>
   ) => {
     if (selectedLevel === 60) {
       alert("レベル60を指定している場合、突破できません");
@@ -75,13 +75,16 @@ export default function Home() {
   //   )
 
   useEffect(() => {
-    setNeedDinnyAmount(
-      new DinnyCalculator().calculate(
-        selectedLevel,
-        selectedCoreSkillLevel,
-        isBreakThrough
-      )
+    const needDinneyAmount = new DinnyCalculator().calculate(
+      selectedLevel,
+      selectedCoreSkillLevel,
+      isBreakThrough
     );
+
+    if (typeof needDinneyAmount === "number") {
+      setNeedDinnyAmount(needDinneyAmount);
+    }
+
     setNeedBatteryForDinny(
       calcNeedBatteryForDinny(
         new DinnyCalculator().calculate(
