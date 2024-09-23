@@ -106,6 +106,16 @@ export default function Home() {
     setNeedBatteryForDinny(0);
   };
 
+  const maxConditions = () => {
+    setSelectedLevel(60);
+    setIsBreakThrough(false);
+    setSelectedCoreSkillLevel("F");
+    setSelectedNormalAttackSkillLevel(12);
+    setSelectedAvoidanceSkillLevel(12);
+    // setNeedDinnyAmount("0");
+    // setNeedBatteryForDinny(0);
+  };
+
   useEffect(() => {
     let skillLevelCondition = undefined;
 
@@ -312,13 +322,31 @@ export default function Home() {
           ・ディニーは突破時（突破時のみ必要。レベル上げてる時は不要）とコアスキル上げる時に必要
         </Typography> */}
 
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: "#F79174", color: "white", maxWidth: "300px" }}
-          onClick={resetConditions}
-        >
-          条件をリセットする
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#F79174",
+              color: "white",
+              maxWidth: "300px",
+            }}
+            onClick={resetConditions}
+          >
+            条件リセット
+          </Button>
+
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#57C40B",
+              color: "white",
+              maxWidth: "300px",
+            }}
+            onClick={maxConditions}
+          >
+            全てMAXで指定
+          </Button>
+        </div>
 
         <Typography variant="h5">機能追加予定</Typography>
         <Typography variant="caption">
