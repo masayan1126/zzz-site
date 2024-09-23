@@ -8,6 +8,9 @@ type SkillLevelCondition =
   | {
       normalAttackSkillLevel: number;
       avoidanceSkillLevel: number;
+      supportSkillLevel: number;
+      specialSkillLevel: number;
+      collaborationSkillLevel: number;
     }
   | undefined;
 
@@ -82,6 +85,35 @@ export class DinnyCalculator {
     if (skillLevelCondition && skillLevelCondition.avoidanceSkillLevel > 1) {
       agentSkillDinnies.map((agentSkillDinny) => {
         if (agentSkillDinny.level === skillLevelCondition.avoidanceSkillLevel) {
+          total_need_dinny += agentSkillDinny.amount;
+        }
+      });
+    }
+
+    if (skillLevelCondition && skillLevelCondition.supportSkillLevel > 1) {
+      agentSkillDinnies.map((agentSkillDinny) => {
+        if (agentSkillDinny.level === skillLevelCondition.supportSkillLevel) {
+          total_need_dinny += agentSkillDinny.amount;
+        }
+      });
+    }
+
+    if (skillLevelCondition && skillLevelCondition.specialSkillLevel > 1) {
+      agentSkillDinnies.map((agentSkillDinny) => {
+        if (agentSkillDinny.level === skillLevelCondition.specialSkillLevel) {
+          total_need_dinny += agentSkillDinny.amount;
+        }
+      });
+    }
+
+    if (
+      skillLevelCondition &&
+      skillLevelCondition.collaborationSkillLevel > 1
+    ) {
+      agentSkillDinnies.map((agentSkillDinny) => {
+        if (
+          agentSkillDinny.level === skillLevelCondition.collaborationSkillLevel
+        ) {
           total_need_dinny += agentSkillDinny.amount;
         }
       });

@@ -26,6 +26,9 @@ import { agentBreakThroughMaterials } from "@/features/agent-traning-calculator/
 import { AgentBreakThroughMaterialAmountCalculator } from "@/features/agent-traning-calculator/agent-breack-through-material-amount-calculator";
 import NormalAttackSkillLevelSelectBox from "@/shared/components/NormalAttackSkillLevelSelectBox";
 import AvoidanceSkillLevelSelectBox from "@/shared/components/AvoidanceSkillLevelSelectBox";
+import SupportSkillLevelSelectBox from "@/shared/components/SupportSkillLevelSelectBox";
+import SpecialSkillLevelSelectBox from "@/shared/components/SpecialSkillLevelSelectBox";
+import CollaborationSkillLevelSelectBox from "@/shared/components/CollaborationSkillLevelSelectBox";
 
 type totalAgentBreakThroughMaterialAmount = {
   A: number;
@@ -43,6 +46,15 @@ export default function Home() {
     useState<number>(1);
 
   const [selectedAvoidanceSkillLevel, setSelectedAvoidanceSkillLevel] =
+    useState<number>(1);
+
+  const [selectedSupportSkillLevel, setSelectedSupportSkillLevel] =
+    useState<number>(1);
+
+  const [selectedSpecialSkillLevel, setSelectedSpecialSkillLevel] =
+    useState<number>(1);
+
+  const [selectedCollaborationSkillLevel, setSelectedCollaborationSkillLevel] =
     useState<number>(1);
 
   const [needDinnyAmount, setNeedDinnyAmount] = useState<string>("0");
@@ -89,6 +101,24 @@ export default function Home() {
     setSelectedAvoidanceSkillLevel(Number(event.target.value));
   };
 
+  const handleSelectedSupportSkillLevel = (
+    event: SelectChangeEvent<string>
+  ) => {
+    setSelectedSupportSkillLevel(Number(event.target.value));
+  };
+
+  const handleSelectedSpecialSkillLevel = (
+    event: SelectChangeEvent<string>
+  ) => {
+    setSelectedSpecialSkillLevel(Number(event.target.value));
+  };
+
+  const handleSelectedCollaborationSkillLevel = (
+    event: SelectChangeEvent<string>
+  ) => {
+    setSelectedCollaborationSkillLevel(Number(event.target.value));
+  };
+
   const calcNeedBatteryForDinny = (dinny: number | string) => {
     if (typeof dinny === "string") {
       return 0;
@@ -102,6 +132,9 @@ export default function Home() {
     setSelectedCoreSkillLevel("");
     setSelectedNormalAttackSkillLevel(1);
     setSelectedAvoidanceSkillLevel(1);
+    setSelectedSupportSkillLevel(1);
+    setSelectedSpecialSkillLevel(1);
+    setSelectedCollaborationSkillLevel(1);
     setNeedDinnyAmount("0");
     setNeedBatteryForDinny(0);
   };
@@ -112,8 +145,9 @@ export default function Home() {
     setSelectedCoreSkillLevel("F");
     setSelectedNormalAttackSkillLevel(12);
     setSelectedAvoidanceSkillLevel(12);
-    // setNeedDinnyAmount("0");
-    // setNeedBatteryForDinny(0);
+    setSelectedSupportSkillLevel(12);
+    setSelectedSpecialSkillLevel(12);
+    setSelectedCollaborationSkillLevel(12);
   };
 
   useEffect(() => {
@@ -121,11 +155,17 @@ export default function Home() {
 
     if (
       selectedNormalAttackSkillLevel !== 1 ||
-      selectedAvoidanceSkillLevel !== 1
+      selectedAvoidanceSkillLevel !== 1 ||
+      selectedSupportSkillLevel !== 1 ||
+      selectedSpecialSkillLevel !== 1 ||
+      selectedCollaborationSkillLevel !== 1
     ) {
       skillLevelCondition = {
         normalAttackSkillLevel: selectedNormalAttackSkillLevel,
         avoidanceSkillLevel: selectedAvoidanceSkillLevel,
+        supportSkillLevel: selectedSupportSkillLevel,
+        specialSkillLevel: selectedSpecialSkillLevel,
+        collaborationSkillLevel: selectedCollaborationSkillLevel,
       };
     }
 
@@ -165,6 +205,9 @@ export default function Home() {
     isBreakThrough,
     selectedNormalAttackSkillLevel,
     selectedAvoidanceSkillLevel,
+    selectedSupportSkillLevel,
+    selectedSpecialSkillLevel,
+    selectedCollaborationSkillLevel,
   ]);
 
   return (
@@ -224,16 +267,63 @@ export default function Home() {
           handleSelectedCoreSkillLevel={handleSelectedCoreSkillLevel}
         />
 
-        <NormalAttackSkillLevelSelectBox
-          selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
-          handleSelectedNormalAttackSkillLevel={
-            handleSelectedNormalAttackSkillLevel
-          }
-        />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "left",
+            flexDirection: {
+              xs: "column", // Extra-small screens (default)
+              sm: "row", // Small screens
+              md: "row", // Medium screens and up
+            },
+            gap: 2,
+          }}
+        >
+          <NormalAttackSkillLevelSelectBox
+            selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
+            handleSelectedNormalAttackSkillLevel={
+              handleSelectedNormalAttackSkillLevel
+            }
+          />
 
-        <AvoidanceSkillLevelSelectBox
-          selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
-          handleSelectedAvoidanceSkillLevel={handleSelectedAvoidanceSkillLevel}
+          <AvoidanceSkillLevelSelectBox
+            selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
+            handleSelectedAvoidanceSkillLevel={
+              handleSelectedAvoidanceSkillLevel
+            }
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "left",
+            flexDirection: {
+              xs: "column", // Extra-small screens (default)
+              sm: "row", // Small screens
+              md: "row", // Medium screens and up
+            },
+            gap: 2,
+          }}
+        >
+          <SupportSkillLevelSelectBox
+            selectedSupportSkillLevel={selectedSupportSkillLevel}
+            handleSelectedSupportSkillLevel={handleSelectedSupportSkillLevel}
+          />
+
+          <SpecialSkillLevelSelectBox
+            selectedSpecialSkillLevel={selectedSpecialSkillLevel}
+            handleSelectedSpecialSkillLevel={handleSelectedSpecialSkillLevel}
+          />
+        </Box>
+
+        <CollaborationSkillLevelSelectBox
+          selectedCollaborationSkillLevel={selectedCollaborationSkillLevel}
+          handleSelectedCollaborationSkillLevel={
+            handleSelectedCollaborationSkillLevel
+          }
         />
 
         {/* <Table /> */}
