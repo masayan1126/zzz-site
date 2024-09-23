@@ -1,6 +1,7 @@
 import {
   agentBreakThroughDinnies,
   agentCoreSkillDinnies,
+  agentSkillDinnies,
 } from "@/features/agent-traning-calculator/constants/dinny";
 
 export class DinnyCalculator {
@@ -8,7 +9,8 @@ export class DinnyCalculator {
     level: number,
     coreSkillLevel: string,
     containBreakThrough: boolean,
-    withComma: boolean = true
+    withComma: boolean = true,
+    skillLevelCondition: object
   ) {
     let total_need_dinny = 0;
 
@@ -28,7 +30,11 @@ export class DinnyCalculator {
 
     if (!containBreakThrough) {
       // 突破しない、コアスキルレベル指定なし、レベルが10の場合、ディニーはかからない
-      if (level === 10 && coreSkillLevel == "") {
+      if (
+        level === 10 &&
+        coreSkillLevel == "" &&
+        skillLevelCondition.normalAttackSkillLevel === 1
+      ) {
         return withComma ? total_need_dinny.toLocaleString() : total_need_dinny;
       }
 
@@ -56,6 +62,24 @@ export class DinnyCalculator {
       agentCoreSkillDinnies.map((agentCoreSkillDinny) => {
         if (agentCoreSkillDinny.level === coreSkillLevel) {
           total_need_dinny += agentCoreSkillDinny.amount;
+        }
+      });
+    }
+
+    if (skillLevelCondition.normalAttackSkillLevel > 1) {
+      agentSkillDinnies.map((agentSkillDinny) => {
+        if (
+          agentSkillDinny.level === skillLevelCondition.normalAttackSkillLevel
+        ) {
+          total_need_dinny += agentSkillDinny.amount;
+        }
+      });
+    }
+
+    if (skillLevelCondition.avoidanceSkillLevel > 1) {
+      agentSkillDinnies.map((agentSkillDinny) => {
+        if (agentSkillDinny.level === skillLevelCondition.avoidanceSkillLevel) {
+          total_need_dinny += agentSkillDinny.amount;
         }
       });
     }

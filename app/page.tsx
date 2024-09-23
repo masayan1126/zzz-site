@@ -24,6 +24,8 @@ import { DinnyCalculator } from "@/features/agent-traning-calculator/dinny-calcu
 import { agentExperiencePoints } from "@/features/agent-traning-calculator/constants/experience-point";
 import { agentBreakThroughMaterials } from "@/features/agent-traning-calculator/constants/material";
 import { AgentBreakThroughMaterialAmountCalculator } from "@/features/agent-traning-calculator/agent-breack-through-material-amount-calculator";
+import NormalAttackSkillLevelSelectBox from "@/shared/components/NormalAttackSkillLevelSelectBox";
+import AvoidanceSkillLevelSelectBox from "@/shared/components/AvoidanceSkillLevelSelectBox";
 
 type totalAgentBreakThroughMaterialAmount = {
   A: number;
@@ -36,6 +38,12 @@ export default function Home() {
   const [isBreakThrough, setIsBreakThrough] = useState<boolean>(false);
   const [selectedCoreSkillLevel, setSelectedCoreSkillLevel] =
     useState<string>("");
+
+  const [selectedNormalAttackSkillLevel, setSelectedNormalAttackSkillLevel] =
+    useState<number>(1);
+
+  const [selectedAvoidanceSkillLevel, setSelectedAvoidanceSkillLevel] =
+    useState<number>(1);
 
   const [needDinnyAmount, setNeedDinnyAmount] = useState<string>("0");
   const [needBatteryForDinny, setNeedBatteryForDinny] = useState<number>(0);
@@ -69,6 +77,18 @@ export default function Home() {
     setSelectedCoreSkillLevel(event.target.value);
   };
 
+  const handleSelectedNormalAttackSkillLevel = (
+    event: SelectChangeEvent<string>
+  ) => {
+    setSelectedNormalAttackSkillLevel(Number(event.target.value));
+  };
+
+  const handleSelectedAvoidanceSkillLevel = (
+    event: SelectChangeEvent<string>
+  ) => {
+    setSelectedAvoidanceSkillLevel(Number(event.target.value));
+  };
+
   const calcNeedBatteryForDinny = (dinny: number | string) => {
     if (typeof dinny === "string") {
       return 0;
@@ -85,10 +105,17 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const skillLevelCondition = {
+      normalAttackSkillLevel: selectedNormalAttackSkillLevel,
+      avoidanceSkillLevel: selectedAvoidanceSkillLevel,
+    };
+
     const needDinneyAmount = new DinnyCalculator().calculate(
       selectedLevel,
       selectedCoreSkillLevel,
-      isBreakThrough
+      isBreakThrough,
+      true,
+      skillLevelCondition
     );
 
     if (typeof needDinneyAmount === "string") {
@@ -101,7 +128,8 @@ export default function Home() {
           selectedLevel,
           selectedCoreSkillLevel,
           isBreakThrough,
-          false
+          false,
+          skillLevelCondition
         )
       )
     );
@@ -112,7 +140,13 @@ export default function Home() {
         isBreakThrough
       )
     );
-  }, [selectedLevel, selectedCoreSkillLevel, isBreakThrough]);
+  }, [
+    selectedLevel,
+    selectedCoreSkillLevel,
+    isBreakThrough,
+    selectedNormalAttackSkillLevel,
+    selectedAvoidanceSkillLevel,
+  ]);
 
   return (
     <main>
@@ -129,6 +163,8 @@ export default function Home() {
           <div>
             <Typography variant="caption">
               シュミレートしたいエージェントのレベルとコアスキルレベル、突破の有無を選択すると、必要なディニーの金額とスタミナが計算できます
+              <br />
+              ※このエージェントのレベルだと、そもそもこのスキルレベルは選択できない、みたいな細かな制御はありませんので、あくまで目安としてご利用ください
             </Typography>
           </div>
           <Tooltip
@@ -167,6 +203,18 @@ export default function Home() {
         <CoreSkillLevelSelectBox
           selectedCoreSkillLevel={selectedCoreSkillLevel}
           handleSelectedCoreSkillLevel={handleSelectedCoreSkillLevel}
+        />
+
+        <NormalAttackSkillLevelSelectBox
+          selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
+          handleSelectedNormalAttackSkillLevel={
+            handleSelectedNormalAttackSkillLevel
+          }
+        />
+
+        <AvoidanceSkillLevelSelectBox
+          selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
+          handleSelectedAvoidanceSkillLevel={handleSelectedAvoidanceSkillLevel}
         />
 
         {/* <Table /> */}

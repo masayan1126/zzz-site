@@ -16,3 +16,17 @@ export const agentCoreSkillDinnies = [
   { level: "E", amount: 205000 },
   { level: "F", amount: 405000 },
 ];
+
+export const agentSkillDinnies = [
+  { level: 2, amount: 2000 },
+  { level: 3, amount: 5000 },
+  { level: 4, amount: 11000 },
+  { level: 5, amount: 20000 },
+  { level: 6, amount: 32000 },
+  { level: 7, amount: 50000 },
+  { level: 8, amount: 95000 },
+  { level: 9, amount: 162500 },
+  { level: 10, amount: 252500 },
+  { level: 11, amount: 365000 },
+  { level: 12, amount: 500000 },
+];
