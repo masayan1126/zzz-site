@@ -6,20 +6,24 @@
   font-size: 34px;
 }
 
+body {
+  height: 100vh;
+}
+
 main {
   padding: 40px 30px;
-  height: 80vh;
+  /* height: 80vh; */
 }
 
 header {
-  height: 7vh;
+  height: 60px;
 }
 
 footer {
   padding: 20px 30px;
   background-color: #101214;
   color: #fff;
-  height: 13vh;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
