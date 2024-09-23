@@ -28,7 +28,7 @@ export default function Home() {
   const [selectedCoreSkillLevel, setSelectedCoreSkillLevel] =
     useState<string>("");
 
-  const [needDinnyAmount, setNeedDinnyAmount] = useState<number>(0);
+  const [needDinnyAmount, setNeedDinnyAmount] = useState<string>("0");
   const [needBatteryForDinny, setNeedBatteryForDinny] = useState<number>(0);
 
   const handleChange = (event: SelectChangeEvent<number>) => {
@@ -63,7 +63,7 @@ export default function Home() {
     setSelectedLevel(60);
     setIsBreakThrough(false);
     setSelectedCoreSkillLevel("");
-    setNeedDinnyAmount(0);
+    setNeedDinnyAmount("0");
     setNeedBatteryForDinny(0);
   };
 
@@ -80,7 +80,7 @@ export default function Home() {
       isBreakThrough
     );
 
-    if (typeof needDinneyAmount === "number") {
+    if (typeof needDinneyAmount === "string") {
       setNeedDinnyAmount(needDinneyAmount);
     }
 
