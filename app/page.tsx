@@ -37,7 +37,9 @@ export default function Home() {
     setSelectedLevel(Number(event.target.value));
   };
 
-  const handleIsBreakThroughChange = (event: React.ChangeEvent) => {
+  const handleIsBreakThroughChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     if (selectedLevel === 60) {
       alert("レベル60を指定している場合、突破できません");
       return;
@@ -45,7 +47,9 @@ export default function Home() {
     setIsBreakThrough(!isBreakThrough);
   };
 
-  const handleSelectedCoreSkillLevel = (event: React.ChangeEvent) => {
+  const handleSelectedCoreSkillLevel = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
     setSelectedCoreSkillLevel(event.target.value);
   };
 
