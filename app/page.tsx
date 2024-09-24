@@ -11,8 +11,6 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  SelectChangeEvent,
-  Snackbar,
   Tooltip,
   Typography,
 } from "@mui/material";
@@ -29,95 +27,50 @@ import AvoidanceSkillLevelSelectBox from "@/shared/components/AvoidanceSkillLeve
 import SupportSkillLevelSelectBox from "@/shared/components/SupportSkillLevelSelectBox";
 import SpecialSkillLevelSelectBox from "@/shared/components/SpecialSkillLevelSelectBox";
 import CollaborationSkillLevelSelectBox from "@/shared/components/CollaborationSkillLevelSelectBox";
-
-type totalAgentBreakThroughMaterialAmount = {
-  A: number;
-  B: number;
-  C: number;
-};
+import useAgentLevel from "@/features/agent-traning-calculator/hooks/useAgentLevel";
+import useAgentCoreSkillLevel from "@/features/agent-traning-calculator/hooks/useAgentCoreSkillLevel";
+import useBreakThrough from "@/features/agent-traning-calculator/hooks/useBreakThrough";
+import { generateMetadata } from "@/features/agent-traning-calculator/meta";
+import SkillLevelChoiceSection from "@/features/agent-traning-calculator/components/SkillLevelChoiceSection";
+import DinnyResultSection from "@/features/agent-traning-calculator/components/DinnyResultSection";
+import AgentExperiencePointAmountResultSection from "@/features/agent-traning-calculator/components/AgentExperiencePointAmountResultSection";
+import AgentBreakThroughMaterialAmountResultSection from "@/features/agent-traning-calculator/components/AgentBreakThroughMaterialAmountResultSection";
 
 export default function Home() {
-  const [selectedLevel, setSelectedLevel] = useState<number>(60);
-  const [isBreakThrough, setIsBreakThrough] = useState<boolean>(false);
-  const [selectedCoreSkillLevel, setSelectedCoreSkillLevel] =
-    useState<string>("");
+  const { selectedLevel, setSelectedLevel, handleLevelChange } =
+    useAgentLevel();
 
-  const [selectedNormalAttackSkillLevel, setSelectedNormalAttackSkillLevel] =
-    useState<number>(1);
+  const {
+    isBreakThrough,
+    setIsBreakThrough,
+    handleIsBreakThroughChange,
+    needAgentBreakThroughMaterialAmount,
+    setNeedAgentBreakThroughMaterialAmount,
+  } = useBreakThrough();
 
-  const [selectedAvoidanceSkillLevel, setSelectedAvoidanceSkillLevel] =
-    useState<number>(1);
-
-  const [selectedSupportSkillLevel, setSelectedSupportSkillLevel] =
-    useState<number>(1);
-
-  const [selectedSpecialSkillLevel, setSelectedSpecialSkillLevel] =
-    useState<number>(1);
-
-  const [selectedCollaborationSkillLevel, setSelectedCollaborationSkillLevel] =
-    useState<number>(1);
+  const {
+    selectedCoreSkillLevel,
+    setSelectedCoreSkillLevel,
+    handleSelectedCoreSkillLevel,
+    selectedNormalAttackSkillLevel,
+    setSelectedNormalAttackSkillLevel,
+    handleSelectedNormalAttackSkillLevel,
+    selectedAvoidanceSkillLevel,
+    setSelectedAvoidanceSkillLevel,
+    handleSelectedAvoidanceSkillLevel,
+    selectedSupportSkillLevel,
+    setSelectedSupportSkillLevel,
+    handleSelectedSupportSkillLevel,
+    selectedSpecialSkillLevel,
+    setSelectedSpecialSkillLevel,
+    handleSelectedSpecialSkillLevel,
+    selectedCollaborationSkillLevel,
+    setSelectedCollaborationSkillLevel,
+    handleSelectedCollaborationSkillLevel,
+  } = useAgentCoreSkillLevel();
 
   const [needDinnyAmount, setNeedDinnyAmount] = useState<string>("0");
   const [needBatteryForDinny, setNeedBatteryForDinny] = useState<number>(0);
-  const [
-    needAgentBreakThroughMaterialAmount,
-    setNeedAgentBreakThroughMaterialAmount,
-  ] = useState<totalAgentBreakThroughMaterialAmount>({
-    A: 0,
-    B: 0,
-    C: 0,
-  });
-
-  const handleChange = (event: SelectChangeEvent<number>) => {
-    if (Number(event.target.value) === 60) {
-      setIsBreakThrough(false);
-    }
-    setSelectedLevel(Number(event.target.value));
-  };
-
-  const handleIsBreakThroughChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    if (selectedLevel === 60) {
-      alert("レベル60を指定している場合、突破できません");
-      return;
-    }
-    setIsBreakThrough(!isBreakThrough);
-  };
-
-  const handleSelectedCoreSkillLevel = (event: SelectChangeEvent<string>) => {
-    setSelectedCoreSkillLevel(event.target.value);
-  };
-
-  const handleSelectedNormalAttackSkillLevel = (
-    event: SelectChangeEvent<string>
-  ) => {
-    setSelectedNormalAttackSkillLevel(Number(event.target.value));
-  };
-
-  const handleSelectedAvoidanceSkillLevel = (
-    event: SelectChangeEvent<string>
-  ) => {
-    setSelectedAvoidanceSkillLevel(Number(event.target.value));
-  };
-
-  const handleSelectedSupportSkillLevel = (
-    event: SelectChangeEvent<string>
-  ) => {
-    setSelectedSupportSkillLevel(Number(event.target.value));
-  };
-
-  const handleSelectedSpecialSkillLevel = (
-    event: SelectChangeEvent<string>
-  ) => {
-    setSelectedSpecialSkillLevel(Number(event.target.value));
-  };
-
-  const handleSelectedCollaborationSkillLevel = (
-    event: SelectChangeEvent<string>
-  ) => {
-    setSelectedCollaborationSkillLevel(Number(event.target.value));
-  };
 
   const calcNeedBatteryForDinny = (dinny: number | string) => {
     if (typeof dinny === "string") {
@@ -208,7 +161,14 @@ export default function Home() {
     selectedSupportSkillLevel,
     selectedSpecialSkillLevel,
     selectedCollaborationSkillLevel,
+    setNeedAgentBreakThroughMaterialAmount,
   ]);
+
+  useEffect(() => {
+    if (selectedLevel === 60) {
+      setIsBreakThrough(false);
+    }
+  }, [selectedLevel, setIsBreakThrough]);
 
   return (
     <main>
@@ -243,14 +203,16 @@ export default function Home() {
         <div>
           <SelectBox
             selectedLevel={selectedLevel}
-            handleChange={handleChange}
+            handleChange={handleLevelChange}
           />
           <FormGroup>
             <FormControlLabel
               control={
                 <Checkbox
                   checked={isBreakThrough}
-                  onChange={handleIsBreakThroughChange}
+                  onChange={(event) =>
+                    handleIsBreakThroughChange(event, selectedLevel)
+                  }
                 />
               }
               label={
@@ -262,130 +224,44 @@ export default function Home() {
           </FormGroup>
         </div>
 
-        <CoreSkillLevelSelectBox
+        <SkillLevelChoiceSection
           selectedCoreSkillLevel={selectedCoreSkillLevel}
           handleSelectedCoreSkillLevel={handleSelectedCoreSkillLevel}
-        />
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "left",
-            alignItems: "left",
-            flexDirection: {
-              xs: "column", // Extra-small screens (default)
-              sm: "row", // Small screens
-              md: "row", // Medium screens and up
-            },
-            gap: 2,
-          }}
-        >
-          <NormalAttackSkillLevelSelectBox
-            selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
-            handleSelectedNormalAttackSkillLevel={
-              handleSelectedNormalAttackSkillLevel
-            }
-          />
-
-          <AvoidanceSkillLevelSelectBox
-            selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
-            handleSelectedAvoidanceSkillLevel={
-              handleSelectedAvoidanceSkillLevel
-            }
-          />
-        </Box>
-
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "left",
-            alignItems: "left",
-            flexDirection: {
-              xs: "column", // Extra-small screens (default)
-              sm: "row", // Small screens
-              md: "row", // Medium screens and up
-            },
-            gap: 2,
-          }}
-        >
-          <SupportSkillLevelSelectBox
-            selectedSupportSkillLevel={selectedSupportSkillLevel}
-            handleSelectedSupportSkillLevel={handleSelectedSupportSkillLevel}
-          />
-
-          <SpecialSkillLevelSelectBox
-            selectedSpecialSkillLevel={selectedSpecialSkillLevel}
-            handleSelectedSpecialSkillLevel={handleSelectedSpecialSkillLevel}
-          />
-        </Box>
-
-        <CollaborationSkillLevelSelectBox
+          selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
+          handleSelectedNormalAttackSkillLevel={
+            handleSelectedNormalAttackSkillLevel
+          }
+          selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
+          handleSelectedAvoidanceSkillLevel={handleSelectedAvoidanceSkillLevel}
+          selectedSupportSkillLevel={selectedSupportSkillLevel}
+          handleSelectedSupportSkillLevel={handleSelectedSupportSkillLevel}
+          selectedSpecialSkillLevel={selectedSpecialSkillLevel}
+          handleSelectedSpecialSkillLevel={handleSelectedSpecialSkillLevel}
           selectedCollaborationSkillLevel={selectedCollaborationSkillLevel}
           handleSelectedCollaborationSkillLevel={
             handleSelectedCollaborationSkillLevel
           }
         />
 
-        {/* <Table /> */}
+        <DinnyResultSection
+          needDinnyAmount={needDinnyAmount}
+          needBatteryForDinny={needBatteryForDinny}
+          isBreakThrough={isBreakThrough}
+          selectedLevel={selectedLevel}
+        />
 
-        <Typography variant="h6">必要なディニーの総額</Typography>
+        <AgentExperiencePointAmountResultSection
+          selectedLevel={selectedLevel}
+        />
 
-        {agentBreakThroughDinnies.map((agentBreakThroughDinny) => {
-          if (agentBreakThroughDinny.level === selectedLevel) {
-            return (
-              <p key={agentBreakThroughDinny.level}>
-                <span>
-                  {needDinnyAmount}
-                  {isBreakThrough ? (
-                    <Typography variant="caption">（突破分込み）</Typography>
-                  ) : (
-                    ""
-                  )}
-                </span>
-              </p>
-            );
-          }
-        })}
-
-        <Typography variant="caption">
-          このディニーを稼ぐために必要なバッテリーの消費量：
-          {needBatteryForDinny}
-        </Typography>
         <hr />
-        <Typography variant="h6">必要な経験値素材（調査員の記録）</Typography>
-        <Typography variant="caption">
-          必要なA級素材の数と、経験値数を表示しています
-        </Typography>
 
-        {agentExperiencePoints.map((agentExperiencePoint) => {
-          if (selectedLevel == agentExperiencePoint.level.to) {
-            return (
-              <div key={agentExperiencePoint.level.from}>
-                <p>
-                  経験値：{agentExperiencePoint.amount.total.toLocaleString()}
-                </p>
-                <p>素材（A級）:{agentExperiencePoint.material.total.A}個</p>
-              </div>
-            );
+        <AgentBreakThroughMaterialAmountResultSection
+          selectedLevel={selectedLevel}
+          needAgentBreakThroughMaterialAmount={
+            needAgentBreakThroughMaterialAmount
           }
-        })}
-        <hr />
-        <Typography variant="h6">必要なエージェントの突破素材</Typography>
-        <Typography variant="caption">
-          必要な突破素材の数を表示しています
-        </Typography>
-
-        {agentBreakThroughMaterials.map((agentMaterial) => {
-          if (agentMaterial.level === selectedLevel) {
-            return (
-              <div key={agentMaterial.level}>
-                <p>A級突破素材：{needAgentBreakThroughMaterialAmount.A}個</p>
-                <p>B級突破素材：{needAgentBreakThroughMaterialAmount.B}個</p>
-                <p>C級突破素材：{needAgentBreakThroughMaterialAmount.C}個</p>
-              </div>
-            );
-          }
-        })}
+        />
 
         {/* <h3>入手できる場所：</h3> */}
 
@@ -399,6 +275,7 @@ export default function Home() {
         {/* スタミナ60でディニーは75,000 */}
         {/* スタミナ1につき、1,250 */}
 
+        {/* UsefulButtonSection */}
         <div className="flex gap-2">
           <Button
             variant="contained"
