@@ -32,7 +32,7 @@ export default function RootLayout({
             <header>
               <MenuAppBar />
             </header>
-            {children}
+            <main>{children}</main>
             <footer>© {new Date().getFullYear()} zzz masayan</footer>
           </body>
         </UserProvider>

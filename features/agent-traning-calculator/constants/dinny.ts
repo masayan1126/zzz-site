@@ -30,3 +30,62 @@ export const agentSkillDinnies = [
   { level: 11, amount: 365000 },
   { level: 12, amount: 500000 },
 ];
+
+export const soundEngineBreakThroughDinnies = [
+  {
+    level: 0,
+    amount: {
+      S: 0,
+      A: 0,
+      B: 0,
+    },
+  },
+  {
+    level: 10,
+    amount: {
+      S: 12000,
+      A: 9600,
+      B: 7200,
+    },
+  },
+  {
+    level: 20,
+    amount: {
+      S: 40000,
+      A: 32000,
+      B: 24000,
+    },
+  },
+  {
+    level: 30,
+    amount: {
+      S: 100000,
+      A: 80000,
+      B: 60000,
+    },
+  },
+  {
+    level: 40,
+    amount: {
+      S: 200000,
+      A: 160000,
+      B: 120000,
+    },
+  },
+  {
+    level: 50,
+    amount: {
+      S: 400000,
+      A: 320000,
+      B: 240000,
+    },
+  },
+  {
+    level: 60,
+    amount: {
+      S: 400000,
+      A: 320000,
+      B: 240000,
+    },
+  },
+];

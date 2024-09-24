@@ -25,6 +25,8 @@ import SkillLevelChoiceSection from "@/features/agent-traning-calculator/compone
 import DinnyResultSection from "@/features/agent-traning-calculator/components/DinnyResultSection";
 import AgentExperiencePointAmountResultSection from "@/features/agent-traning-calculator/components/AgentExperiencePointAmountResultSection";
 import AgentBreakThroughMaterialAmountResultSection from "@/features/agent-traning-calculator/components/AgentBreakThroughMaterialAmountResultSection";
+import Link from "next/link";
+import { Link as MuiLink } from "@mui/material";
 
 export default function Home() {
   const { selectedLevel, setSelectedLevel, handleLevelChange } =
@@ -161,143 +163,153 @@ export default function Home() {
   }, [selectedLevel, setIsBreakThrough]);
 
   return (
-    <main>
-      <Box
-        display="flex"
-        justifyContent="left"
-        alignItems="left"
-        // minHeight="100vh"
-        flexDirection="column"
-        gap={3}
-      >
-        <div>
-          <Typography variant="h5">エージェント育成計算機</Typography>
-          <div>
-            <Typography variant="caption">
-              シュミレートしたいエージェントのレベルとコアスキルレベル、突破の有無を選択すると、必要なディニーの金額とスタミナが計算できます
-              <br />
-              ※このエージェントのレベルだと、そもそもこのスキルレベルは選択できない、みたいな細かな制御はありませんので、あくまで目安としてご利用ください
-            </Typography>
-          </div>
-          <Tooltip
-            title="エージェントのタイプ（撃破、強化・・・）ごとに必要な素材。A（赤）,B（青）,C（緑）"
-            arrow
-          >
-            <Typography variant="caption">
-              エージェントの突破素材とは
-              <InfoIcon fontSize="small" />
-            </Typography>
-          </Tooltip>
-        </div>
+    <Box
+      display="flex"
+      justifyContent="left"
+      alignItems="left"
+      // minHeight="100vh"
+      flexDirection="column"
+      gap={3}
+    >
+      {/* a {
+  color: "#0070f3" !important;
+  text-decoration: "none" !important;
+} */}
 
+      <div>
+        <Typography variant="h5">エージェント育成計算機</Typography>
+        <MuiLink
+          component={Link}
+          href="/training-calculator/sound-engine"
+          underline="none"
+        >
+          <Typography variant="subtitle1" component="p">
+            音動機育成計算機はこちら
+          </Typography>
+        </MuiLink>
         <div>
-          <SelectBox
-            selectedLevel={selectedLevel}
-            handleChange={handleLevelChange}
+          <Typography variant="caption">
+            シュミレートしたいエージェントのレベルとスキルレベル、コアスキルレベル、突破の有無を選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
+            <br />
+            ※このエージェントのレベルだと、そもそもこのスキルレベルは選択できない、みたいな細かな制御はありませんので、あくまで目安としてご利用ください
+          </Typography>
+        </div>
+        <Tooltip
+          title="エージェントのタイプ（撃破、強化・・・）ごとに必要な素材。A（赤）,B（青）,C（緑）"
+          arrow
+        >
+          <Typography variant="caption">
+            エージェントの突破素材とは
+            <InfoIcon fontSize="small" />
+          </Typography>
+        </Tooltip>
+      </div>
+
+      <div>
+        <SelectBox
+          selectedLevel={selectedLevel}
+          handleChange={handleLevelChange}
+        />
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={isBreakThrough}
+                onChange={(event) =>
+                  handleIsBreakThroughChange(event, selectedLevel)
+                }
+              />
+            }
+            label={
+              <Typography variant="caption">
+                このレベルの突破時に必要な分を含める（※EX.)レベルを20で指定し、このチェックがついてない場合はレベル10突破分が自動的に含まれます）
+              </Typography>
+            }
           />
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={isBreakThrough}
-                  onChange={(event) =>
-                    handleIsBreakThroughChange(event, selectedLevel)
-                  }
-                />
-              }
-              label={
-                <Typography variant="caption">
-                  このレベルの突破時に必要な分を含める（※EX.)レベルを20で指定し、このチェックがついてない場合はレベル10突破分が自動的に含まれます）
-                </Typography>
-              }
-            />
-          </FormGroup>
-        </div>
+        </FormGroup>
+      </div>
 
-        <SkillLevelChoiceSection
-          selectedCoreSkillLevel={selectedCoreSkillLevel}
-          handleSelectedCoreSkillLevel={handleSelectedCoreSkillLevel}
-          selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
-          handleSelectedNormalAttackSkillLevel={
-            handleSelectedNormalAttackSkillLevel
-          }
-          selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
-          handleSelectedAvoidanceSkillLevel={handleSelectedAvoidanceSkillLevel}
-          selectedSupportSkillLevel={selectedSupportSkillLevel}
-          handleSelectedSupportSkillLevel={handleSelectedSupportSkillLevel}
-          selectedSpecialSkillLevel={selectedSpecialSkillLevel}
-          handleSelectedSpecialSkillLevel={handleSelectedSpecialSkillLevel}
-          selectedCollaborationSkillLevel={selectedCollaborationSkillLevel}
-          handleSelectedCollaborationSkillLevel={
-            handleSelectedCollaborationSkillLevel
-          }
-        />
+      <SkillLevelChoiceSection
+        selectedCoreSkillLevel={selectedCoreSkillLevel}
+        handleSelectedCoreSkillLevel={handleSelectedCoreSkillLevel}
+        selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
+        handleSelectedNormalAttackSkillLevel={
+          handleSelectedNormalAttackSkillLevel
+        }
+        selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
+        handleSelectedAvoidanceSkillLevel={handleSelectedAvoidanceSkillLevel}
+        selectedSupportSkillLevel={selectedSupportSkillLevel}
+        handleSelectedSupportSkillLevel={handleSelectedSupportSkillLevel}
+        selectedSpecialSkillLevel={selectedSpecialSkillLevel}
+        handleSelectedSpecialSkillLevel={handleSelectedSpecialSkillLevel}
+        selectedCollaborationSkillLevel={selectedCollaborationSkillLevel}
+        handleSelectedCollaborationSkillLevel={
+          handleSelectedCollaborationSkillLevel
+        }
+      />
 
-        <DinnyResultSection
-          needDinnyAmount={needDinnyAmount}
-          needBatteryForDinny={needBatteryForDinny}
-          isBreakThrough={isBreakThrough}
-          selectedLevel={selectedLevel}
-        />
+      <DinnyResultSection
+        needDinnyAmount={needDinnyAmount}
+        needBatteryForDinny={needBatteryForDinny}
+        isBreakThrough={isBreakThrough}
+        selectedLevel={selectedLevel}
+      />
 
-        <AgentExperiencePointAmountResultSection
-          selectedLevel={selectedLevel}
-        />
+      <AgentExperiencePointAmountResultSection selectedLevel={selectedLevel} />
 
-        <hr />
+      <hr />
 
-        <AgentBreakThroughMaterialAmountResultSection
-          selectedLevel={selectedLevel}
-          needAgentBreakThroughMaterialAmount={
-            needAgentBreakThroughMaterialAmount
-          }
-        />
+      <AgentBreakThroughMaterialAmountResultSection
+        selectedLevel={selectedLevel}
+        needAgentBreakThroughMaterialAmount={
+          needAgentBreakThroughMaterialAmount
+        }
+      />
 
-        {/* <h3>入手できる場所：</h3> */}
+      {/* <h3>入手できる場所：</h3> */}
 
-        {/* <Typography variant="h5">育成予備知識</Typography>
+      {/* <Typography variant="h5">育成予備知識</Typography>
 
         <Typography variant="caption">
           ・ディニーは突破時（突破時のみ必要。レベル上げてる時は不要）とコアスキル上げる時に必要
         </Typography> */}
 
-        {/* スタミナ100でディニーは125,000 */}
-        {/* スタミナ60でディニーは75,000 */}
-        {/* スタミナ1につき、1,250 */}
+      {/* スタミナ100でディニーは125,000 */}
+      {/* スタミナ60でディニーは75,000 */}
+      {/* スタミナ1につき、1,250 */}
 
-        {/* UsefulButtonSection */}
-        <div className="flex gap-2">
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#F79174",
-              color: "white",
-              maxWidth: "300px",
-            }}
-            onClick={resetConditions}
-          >
-            条件リセット
-          </Button>
+      {/* UsefulButtonSection */}
+      <div className="flex gap-2">
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#F79174",
+            color: "white",
+            maxWidth: "300px",
+          }}
+          onClick={resetConditions}
+        >
+          条件リセット
+        </Button>
 
-          <Button
-            variant="contained"
-            sx={{
-              backgroundColor: "#57C40B",
-              color: "white",
-              maxWidth: "300px",
-            }}
-            onClick={maxConditions}
-          >
-            全てMAXで指定
-          </Button>
-        </div>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor: "#57C40B",
+            color: "white",
+            maxWidth: "300px",
+          }}
+          onClick={maxConditions}
+        >
+          全てMAXで指定
+        </Button>
+      </div>
 
-        <Typography variant="h5">機能追加予定</Typography>
-        <Typography variant="caption">
-          ・必要なキャラのエキスパート素材、週ボス素材。必要なバッテリーの消費量
-        </Typography>
-        <Typography variant="caption">・音同期育成の計算</Typography>
-      </Box>
-    </main>
+      <Typography variant="h5">機能追加予定</Typography>
+      <Typography variant="caption">
+        ・必要なキャラのエキスパート素材、週ボス素材。必要なバッテリーの消費量
+      </Typography>
+      <Typography variant="caption">・音同期育成の計算</Typography>
+    </Box>
   );
 }
