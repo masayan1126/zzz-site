@@ -15,22 +15,12 @@ import {
   Typography,
 } from "@mui/material";
 import SelectBox from "@/shared/components/SelectBox";
-import CoreSkillLevelSelectBox from "@/shared/components/CoreSkillLevelSelectBox";
 import InfoIcon from "@mui/icons-material/Info";
-import { agentBreakThroughDinnies } from "@/features/agent-traning-calculator/constants/dinny";
 import { DinnyCalculator } from "@/features/agent-traning-calculator/dinny-calculator";
-import { agentExperiencePoints } from "@/features/agent-traning-calculator/constants/experience-point";
-import { agentBreakThroughMaterials } from "@/features/agent-traning-calculator/constants/material";
 import { AgentBreakThroughMaterialAmountCalculator } from "@/features/agent-traning-calculator/agent-breack-through-material-amount-calculator";
-import NormalAttackSkillLevelSelectBox from "@/shared/components/NormalAttackSkillLevelSelectBox";
-import AvoidanceSkillLevelSelectBox from "@/shared/components/AvoidanceSkillLevelSelectBox";
-import SupportSkillLevelSelectBox from "@/shared/components/SupportSkillLevelSelectBox";
-import SpecialSkillLevelSelectBox from "@/shared/components/SpecialSkillLevelSelectBox";
-import CollaborationSkillLevelSelectBox from "@/shared/components/CollaborationSkillLevelSelectBox";
 import useAgentLevel from "@/features/agent-traning-calculator/hooks/useAgentLevel";
 import useAgentCoreSkillLevel from "@/features/agent-traning-calculator/hooks/useAgentCoreSkillLevel";
 import useBreakThrough from "@/features/agent-traning-calculator/hooks/useBreakThrough";
-import { generateMetadata } from "@/features/agent-traning-calculator/meta";
 import SkillLevelChoiceSection from "@/features/agent-traning-calculator/components/SkillLevelChoiceSection";
 import DinnyResultSection from "@/features/agent-traning-calculator/components/DinnyResultSection";
 import AgentExperiencePointAmountResultSection from "@/features/agent-traning-calculator/components/AgentExperiencePointAmountResultSection";
