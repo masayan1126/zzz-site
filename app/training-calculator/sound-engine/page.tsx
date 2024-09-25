@@ -17,6 +17,14 @@ import { soundEngineBreakThroughDinnies } from "@/features/agent-traning-calcula
 import { DinnyCalculator } from "@/features/traning-calculator/sound-engine/dinny-calculator";
 import Link from "next/link";
 import { Link as MuiLink } from "@mui/material";
+import { soundEngineBreakThroughMaterials } from "@/features/agent-traning-calculator/constants/material";
+import { SoundEngineBreakThroughMaterialAmountCalculator } from "@/features/agent-traning-calculator/sound-engine-breack-through-material-amount-calculator";
+
+export type TotalSoundEngineBreakThroughMaterialAmount = {
+  A: number;
+  B: number;
+  C: number;
+};
 
 export default function SoundEngineTraining() {
   const [selectedLevel, setSelectedLevel] = useState<number>(60);
@@ -28,6 +36,15 @@ export default function SoundEngineTraining() {
     setSelectedLevel(Number(event.target.value));
   };
   const [isBreakThrough, setIsBreakThrough] = useState<boolean>(false);
+
+  const [
+    needSoundEngineBreakThroughMaterialAmount,
+    setNeedSoundEngineBreakThroughMaterialAmount,
+  ] = useState<TotalSoundEngineBreakThroughMaterialAmount>({
+    A: 0,
+    B: 0,
+    C: 0,
+  });
 
   const handleIsBreakThroughChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -63,12 +80,13 @@ export default function SoundEngineTraining() {
     //   )
     // );
 
-    // setNeedAgentBreakThroughMaterialAmount(
-    //   new AgentBreakThroughMaterialAmountCalculator().calculate(
-    //     selectedLevel,
-    //     isBreakThrough
-    //   )
-    // );
+    setNeedSoundEngineBreakThroughMaterialAmount(
+      new SoundEngineBreakThroughMaterialAmountCalculator().calculate(
+        selectedLevel,
+        selectedRank,
+        isBreakThrough
+      )
+    );
   }, [isBreakThrough, selectedLevel, selectedRank]);
 
   useEffect(() => {
@@ -167,6 +185,31 @@ export default function SoundEngineTraining() {
             );
           }
         })}
+
+        <Typography variant="h6">必要な音動機の突破素材</Typography>
+        <Typography variant="caption">
+          必要な突破素材の数を表示しています
+        </Typography>
+
+        {soundEngineBreakThroughMaterials.map(
+          (soundEngineBreakThroughMaterial) => {
+            if (soundEngineBreakThroughMaterial.level === selectedLevel) {
+              return (
+                <div key={soundEngineBreakThroughMaterial.level}>
+                  <p>
+                    A級突破素材：{needSoundEngineBreakThroughMaterialAmount.A}個
+                  </p>
+                  <p>
+                    B級突破素材：{needSoundEngineBreakThroughMaterialAmount.B}個
+                  </p>
+                  <p>
+                    C級突破素材：{needSoundEngineBreakThroughMaterialAmount.C}個
+                  </p>
+                </div>
+              );
+            }
+          }
+        )}
 
         {/* <Typography variant="caption">
           このディニーを稼ぐために必要なバッテリーの消費量：
