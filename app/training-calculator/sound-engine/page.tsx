@@ -111,6 +111,15 @@ export default function SoundEngineTraining() {
             エージェント育成計算機はこちら
           </Typography>
         </MuiLink>
+        <MuiLink
+          component={Link}
+          href="/training-calculator/driver-disk"
+          underline="none"
+        >
+          <Typography variant="subtitle1" component="p">
+            ドライバディスク育成計算機はこちら
+          </Typography>
+        </MuiLink>
         <div>
           <Typography variant="caption">
             シュミレートしたい音動機のレベルとランク、突破の有無を選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます

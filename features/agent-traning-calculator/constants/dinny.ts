@@ -89,3 +89,59 @@ export const soundEngineBreakThroughDinnies = [
     },
   },
 ];
+
+export const driverDiskDinnies = [
+  {
+    level: 0,
+    amount: {
+      S: 0,
+      A: 0,
+      B: 0,
+    },
+  },
+  //   0から3
+  {
+    level: 3,
+    amount: {
+      S: 3600,
+      A: 0,
+      B: 0,
+    },
+  },
+  //   3から6
+  {
+    level: 6,
+    amount: {
+      S: 11700,
+      A: 0,
+      B: 0,
+    },
+  },
+  //   6から9
+  {
+    level: 9,
+    amount: {
+      S: 24450,
+      A: 0,
+      B: 0,
+    },
+  },
+  //  9から12
+  {
+    level: 12,
+    amount: {
+      S: 43200,
+      A: 0,
+      B: 0,
+    },
+  },
+  //   12から15
+  {
+    level: 15,
+    amount: {
+      S: 72000,
+      A: 0,
+      B: 0,
+    },
+  },
+];

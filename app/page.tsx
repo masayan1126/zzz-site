@@ -187,6 +187,15 @@ export default function Home() {
             音動機育成計算機はこちら
           </Typography>
         </MuiLink>
+        <MuiLink
+          component={Link}
+          href="/training-calculator/driver-disk"
+          underline="none"
+        >
+          <Typography variant="subtitle1" component="p">
+            ドライバディスク育成計算機はこちら
+          </Typography>
+        </MuiLink>
         <div>
           <Typography variant="caption">
             シュミレートしたいエージェントのレベルとスキルレベル、コアスキルレベル、突破の有無を選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
@@ -309,9 +318,11 @@ export default function Home() {
       <Typography variant="caption">
         ・必要なキャラのエキスパート素材、週ボス素材。必要なバッテリーの消費量
       </Typography>
-      <Typography variant="caption">・音同期育成の計算</Typography>
       <Typography variant="caption">
         ・必要な経験値素材（調査員の記録）のB級、C級素材での換算
+      </Typography>
+      <Typography variant="caption">
+        ・ドライバディスクの育成に必要な素材の数
       </Typography>
     </Box>
   );

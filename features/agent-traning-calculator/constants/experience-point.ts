@@ -110,3 +110,55 @@ export const agentExperiencePoints = [
     },
   },
 ];
+
+// 助剤
+export const driverDiskExperiencePoints = [
+  {
+    level: 0,
+    amount: {
+      A: 0,
+      B: 0,
+      C: 0,
+    },
+  },
+  {
+    level: 3,
+    amount: {
+      A: 1.5,
+      B: 0,
+      C: 0,
+    },
+  },
+  {
+    level: 6,
+    amount: {
+      A: 4,
+      B: 0,
+      C: 0,
+    },
+  },
+  {
+    level: 9,
+    amount: {
+      A: 8,
+      B: 0,
+      C: 0,
+    },
+  },
+  {
+    level: 12,
+    amount: {
+      A: 15,
+      B: 0,
+      C: 0,
+    },
+  },
+  {
+    level: 15,
+    amount: {
+      A: 24,
+      B: 0,
+      C: 0,
+    },
+  },
+];
