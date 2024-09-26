@@ -14,7 +14,7 @@ export default function AgentExperiencePointAmountResultSection({
     <>
       <Typography variant="h6">必要な経験値素材（調査員の記録）</Typography>
       <Typography variant="caption">
-        必要なA級素材の数と、経験値数を表示しています
+        必要なA級素材の数と、経験値数を表示しています（指定したレベルに到達するのに必要な累計を表示しています。※小計ではありません）
       </Typography>
 
       {agentExperiencePoints.map((agentExperiencePoint) => {

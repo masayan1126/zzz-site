@@ -310,6 +310,9 @@ export default function Home() {
         ・必要なキャラのエキスパート素材、週ボス素材。必要なバッテリーの消費量
       </Typography>
       <Typography variant="caption">・音同期育成の計算</Typography>
+      <Typography variant="caption">
+        ・必要な経験値素材（調査員の記録）のB級、C級素材での換算
+      </Typography>
     </Box>
   );
 }
