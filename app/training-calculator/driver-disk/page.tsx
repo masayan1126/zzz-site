@@ -79,6 +79,7 @@ export default function DriverDiskTraining() {
       gap={3}
     >
       <div>
+        <Typography variant="h5">ドライバディスク育成計算機</Typography>
         <div>
           <Typography variant="caption">
             シュミレートしたいドライバディスクのレベルとランクを選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます

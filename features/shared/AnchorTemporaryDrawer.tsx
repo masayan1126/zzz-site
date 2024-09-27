@@ -35,7 +35,10 @@ const AnchorTemporaryDrawer = () => {
 
   return (
     <Box>
-      <AppBar position="static" sx={{ backgroundColor: "rgb(79, 79, 79)" }}>
+      <AppBar
+        position="static"
+        sx={{ backgroundColor: "rgb(79, 79, 79)", paddingLeft: "15px" }}
+      >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="caption">
             ZZZ / ゼンレスゾーンゼロ / ゼンゼロ 攻略サイト
