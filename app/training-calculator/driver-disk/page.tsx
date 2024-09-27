@@ -1,28 +1,15 @@
 "use client";
 
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  SelectChangeEvent,
-  Tooltip,
-  Typography,
-} from "@mui/material";
-import InfoIcon from "@mui/icons-material/Info";
-import SoundEngineLevelSelectBox from "@/features/traning-calculator/sound-engine/components/SoundEngineLevelSelectBox";
+import { Box, SelectChangeEvent, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import SoundEngineRankSelectBox from "@/features/traning-calculator/sound-engine/components/SoundEngineRankSelectBox";
-import { soundEngineBreakThroughDinnies } from "@/features/agent-traning-calculator/constants/dinny";
 import { DinnyCalculator } from "@/features/traning-calculator/driver-disk/dinny-calculator";
 import Link from "next/link";
 import { Link as MuiLink } from "@mui/material";
-import { soundEngineBreakThroughMaterials } from "@/features/agent-traning-calculator/constants/material";
-import { SoundEngineBreakThroughMaterialAmountCalculator } from "@/features/agent-traning-calculator/sound-engine-breack-through-material-amount-calculator";
 import DriverDiskLevelSelectBox from "@/features/traning-calculator/driver-disk/components/DriverDiskLevelSelectBox";
 import DriverDiskRankSelectBox from "@/features/traning-calculator/driver-disk/components/DriverDiskRankSelectBox";
 import { driverDiskExperiencePoints } from "@/features/agent-traning-calculator/constants/experience-point";
 import { DriverDiskMaterialAmountCalculator } from "@/features/traning-calculator/driver-disk/driver-disk-material-amount-calculator";
+import useBattery from "@/features/shared/hooks/useBattery";
 
 type TotalDriverDiskMaterialAmount = {
   A: number;
@@ -34,7 +21,12 @@ export default function DriverDiskTraining() {
   const [selectedLevel, setSelectedLevel] = useState<number>(0);
   const [selectedRank, setSelectedRank] = useState<string>("S");
   const [needDinnyAmount, setNeedDinnyAmount] = useState<string>("0");
-  const [needBatteryForDinny, setNeedBatteryForDinny] = useState<number>(0);
+
+  const {
+    needBatteryForDinny,
+    setNeedBatteryForDinny,
+    calcNeedBatteryForDinny,
+  } = useBattery();
 
   const [
     needDriverDiskExperiencePointAmount,
@@ -65,33 +57,28 @@ export default function DriverDiskTraining() {
         selectedRank
       )
     );
-  }, [selectedLevel, selectedRank]);
+
+    setNeedBatteryForDinny(
+      calcNeedBatteryForDinny(
+        new DinnyCalculator().calculate(selectedLevel, selectedRank, false)
+      )
+    );
+  }, [
+    selectedLevel,
+    selectedRank,
+    calcNeedBatteryForDinny,
+    setNeedBatteryForDinny,
+  ]);
 
   return (
     <Box
       display="flex"
       justifyContent="left"
       alignItems="left"
-      // minHeight="100vh"
       flexDirection="column"
       gap={3}
     >
       <div>
-        <Typography variant="h5">ドライバディスク育成計算機</Typography>
-        <MuiLink component={Link} href="/" underline="none">
-          <Typography variant="subtitle1" component="p">
-            エージェント育成計算機はこちら
-          </Typography>
-        </MuiLink>
-        <MuiLink
-          component={Link}
-          href="/training-calculator/sound-engine"
-          underline="none"
-        >
-          <Typography variant="subtitle1" component="p">
-            音動機育成計算機はこちら
-          </Typography>
-        </MuiLink>
         <div>
           <Typography variant="caption">
             シュミレートしたいドライバディスクのレベルとランクを選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
@@ -146,10 +133,14 @@ export default function DriverDiskTraining() {
           }
         })}
 
-        {/* <Typography variant="caption">
+        <Typography variant="caption">
           このディニーを稼ぐために必要なバッテリーの消費量：
           {needBatteryForDinny}
-        </Typography> */}
+        </Typography>
+        <Typography variant="h5">機能追加予定</Typography>
+        <Typography variant="caption">
+          ・A級、B級ドライバディスクの育成に必要な素材の数、ディニー
+        </Typography>
       </Box>
     </Box>
   );

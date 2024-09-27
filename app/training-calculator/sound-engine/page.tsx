@@ -105,26 +105,6 @@ export default function SoundEngineTraining() {
       gap={3}
     >
       <div>
-        <Typography variant="h5">音動機育成計算機</Typography>
-        <MuiLink component={Link} href="/" underline="none">
-          <Typography variant="subtitle1" component="p">
-            エージェント育成計算機はこちら
-          </Typography>
-        </MuiLink>
-        <MuiLink
-          component={Link}
-          href="/training-calculator/driver-disk"
-          underline="none"
-        >
-          <Typography variant="subtitle1" component="p">
-            ドライバディスク育成計算機はこちら
-          </Typography>
-        </MuiLink>
-        <div>
-          <Typography variant="caption">
-            シュミレートしたい音動機のレベルとランク、突破の有無を選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
-          </Typography>
-        </div>
         <Tooltip
           title="音動機のタイプ（撃破、強化・・・）ごとに必要な素材。A（赤）,B（青）,C（緑）"
           arrow

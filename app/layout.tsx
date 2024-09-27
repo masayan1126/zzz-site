@@ -5,6 +5,7 @@ import { UserProvider } from "@/features/auth/UserProvider";
 import { ApolloWrapper } from "@/features/auth/ApolloWrapper";
 import MenuAppBar from "@/features/shared/Navbar";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import AnchorTemporaryDrawer from "@/features/shared/AnchorTemporaryDrawer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,7 +31,7 @@ export default function RootLayout({
         <UserProvider>
           <body className={inter.className}>
             <header>
-              <MenuAppBar />
+              <AnchorTemporaryDrawer />
             </header>
             <main>{children}</main>
             <footer>© {new Date().getFullYear()} zzz masayan</footer>

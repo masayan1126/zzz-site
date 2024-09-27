@@ -12,6 +12,7 @@ export class DinnyCalculator {
     driverDiskDinnies.map((driverDiskDinny) => {
       if (driverDiskDinny.level === level) {
         const targetRank = driverDiskDinny.amount;
+
         if (rank === "S") {
           total_need_dinny += targetRank.S;
         }

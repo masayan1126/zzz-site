@@ -27,6 +27,8 @@ import AgentExperiencePointAmountResultSection from "@/features/agent-traning-ca
 import AgentBreakThroughMaterialAmountResultSection from "@/features/agent-traning-calculator/components/AgentBreakThroughMaterialAmountResultSection";
 import Link from "next/link";
 import { Link as MuiLink } from "@mui/material";
+import { calcNeedBatteryByDinny } from "@/features/shared/battery-calculator";
+import useBattery from "@/features/shared/hooks/useBattery";
 
 export default function Home() {
   const { selectedLevel, setSelectedLevel, handleLevelChange } =
@@ -62,14 +64,12 @@ export default function Home() {
   } = useAgentCoreSkillLevel();
 
   const [needDinnyAmount, setNeedDinnyAmount] = useState<string>("0");
-  const [needBatteryForDinny, setNeedBatteryForDinny] = useState<number>(0);
 
-  const calcNeedBatteryForDinny = (dinny: number | string) => {
-    if (typeof dinny === "string") {
-      return 0;
-    }
-    return Math.round(dinny / 1250);
-  };
+  const {
+    needBatteryForDinny,
+    setNeedBatteryForDinny,
+    calcNeedBatteryForDinny,
+  } = useBattery();
 
   const resetConditions = () => {
     setSelectedLevel(60);
@@ -154,6 +154,8 @@ export default function Home() {
     selectedSpecialSkillLevel,
     selectedCollaborationSkillLevel,
     setNeedAgentBreakThroughMaterialAmount,
+    setNeedBatteryForDinny,
+    calcNeedBatteryForDinny,
   ]);
 
   useEffect(() => {
@@ -167,35 +169,12 @@ export default function Home() {
       display="flex"
       justifyContent="left"
       alignItems="left"
-      // minHeight="100vh"
       flexDirection="column"
       gap={3}
     >
-      {/* a {
-  color: "#0070f3" !important;
-  text-decoration: "none" !important;
-} */}
-
       <div>
         <Typography variant="h5">エージェント育成計算機</Typography>
-        <MuiLink
-          component={Link}
-          href="/training-calculator/sound-engine"
-          underline="none"
-        >
-          <Typography variant="subtitle1" component="p">
-            音動機育成計算機はこちら
-          </Typography>
-        </MuiLink>
-        <MuiLink
-          component={Link}
-          href="/training-calculator/driver-disk"
-          underline="none"
-        >
-          <Typography variant="subtitle1" component="p">
-            ドライバディスク育成計算機はこちら
-          </Typography>
-        </MuiLink>
+
         <div>
           <Typography variant="caption">
             シュミレートしたいエージェントのレベルとスキルレベル、コアスキルレベル、突破の有無を選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
@@ -292,7 +271,7 @@ export default function Home() {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#F79174",
+            backgroundColor: "#CD1D1F",
             color: "white",
             maxWidth: "300px",
           }}
@@ -304,7 +283,7 @@ export default function Home() {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#57C40B",
+            backgroundColor: "#052C5A",
             color: "white",
             maxWidth: "300px",
           }}
@@ -320,9 +299,6 @@ export default function Home() {
       </Typography>
       <Typography variant="caption">
         ・必要な経験値素材（調査員の記録）のB級、C級素材での換算
-      </Typography>
-      <Typography variant="caption">
-        ・ドライバディスクの育成に必要な素材の数
       </Typography>
     </Box>
   );
