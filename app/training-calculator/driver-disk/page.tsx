@@ -79,7 +79,7 @@ export default function DriverDiskTraining() {
       gap={3}
     >
       <div>
-        <Typography variant="h5">ドライバディスク育成計算機</Typography>
+        <Typography variant="h6">ドライバディスク育成計算機</Typography>
         <div>
           <Typography variant="caption">
             シュミレートしたいドライバディスクのレベルとランクを選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
@@ -112,10 +112,10 @@ export default function DriverDiskTraining() {
         />
         <Typography variant="caption">※現在、S級のみ対応しています</Typography>
 
-        <Typography variant="h6">必要なディニーの総額</Typography>
+        <Typography variant="subtitle2">必要なディニーの総額</Typography>
         <span>{needDinnyAmount}</span>
 
-        <Typography variant="h6">
+        <Typography variant="subtitle2">
           必要な助剤（ドライバディスクの素材）
         </Typography>
         <Typography variant="caption">
@@ -138,7 +138,7 @@ export default function DriverDiskTraining() {
           このディニーを稼ぐために必要なバッテリーの消費量：
           {needBatteryForDinny}
         </Typography>
-        <Typography variant="h5">機能追加予定</Typography>
+        <Typography variant="subtitle2">機能追加予定</Typography>
         <Typography variant="caption">・ディスク枚の指定</Typography>
         <Typography variant="caption">
           ・A級、B級ドライバディスクの育成に必要な素材の数、ディニー

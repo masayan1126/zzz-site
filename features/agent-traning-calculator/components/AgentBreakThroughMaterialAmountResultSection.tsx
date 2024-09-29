@@ -16,7 +16,7 @@ export default function AgentBreakThroughMaterialAmountResultSection({
   return (
     <>
       {/* AgentBreakThroughMaterialAmountResultSection */}
-      <Typography variant="h6">必要なエージェントの突破素材</Typography>
+      <Typography variant="subtitle2">必要なエージェントの突破素材</Typography>
       <Typography variant="caption">
         必要な突破素材の数を表示しています
       </Typography>

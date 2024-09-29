@@ -40,10 +40,11 @@ const AnchorTemporaryDrawer = () => {
         sx={{
           backgroundColor: "#284B7E",
           paddingLeft: "15px",
+          //   opacity: 0.9,
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="subtitle1">
+          <Typography variant="caption">
             ZZZ / ゼンレスゾーンゼロ / ゼンゼロ 攻略サイト
           </Typography>
           <IconButton

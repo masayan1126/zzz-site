@@ -19,7 +19,7 @@ export default function DinnyResultSection({
   return (
     <>
       {/* DinnyResultSection */}
-      <Typography variant="h6">必要なディニーの総額</Typography>
+      <Typography variant="subtitle2">必要なディニーの総額</Typography>
 
       {agentBreakThroughDinnies.map((agentBreakThroughDinny) => {
         if (agentBreakThroughDinny.level === selectedLevel) {

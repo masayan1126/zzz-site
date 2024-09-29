@@ -2,13 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-.page-title {
-  font-size: 34px;
-}
-
 body {
   height: 100vh;
-  background-color: #eef1f6;
+  /* background-color: #eef1f6; */
+  background-color: #ffffff;
   color: #111111;
 }
 

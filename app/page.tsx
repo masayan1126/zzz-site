@@ -173,7 +173,7 @@ export default function Home() {
       gap={3}
     >
       <div>
-        <Typography variant="h5">エージェント育成計算機</Typography>
+        <Typography variant="h6">エージェント育成計算機</Typography>
 
         <div>
           <Typography variant="caption">
@@ -256,7 +256,7 @@ export default function Home() {
 
       {/* <h3>入手できる場所：</h3> */}
 
-      {/* <Typography variant="h5">育成予備知識</Typography>
+      {/* <Typography variant="subtitle2">育成予備知識</Typography>
 
         <Typography variant="caption">
           ・ディニーは突破時（突破時のみ必要。レベル上げてる時は不要）とコアスキル上げる時に必要
@@ -267,7 +267,7 @@ export default function Home() {
       {/* スタミナ1につき、1,250 */}
 
       {/* UsefulButtonSection */}
-      <div className="flex gap-2">
+      <div className="flex gap-3 justify-start">
         <Button
           variant="contained"
           sx={{
@@ -293,7 +293,7 @@ export default function Home() {
         </Button>
       </div>
 
-      <Typography variant="h5">機能追加予定</Typography>
+      <Typography variant="subtitle2">機能追加予定</Typography>
       <Typography variant="caption">
         ・必要なキャラのエキスパート素材、週ボス素材。必要なバッテリーの消費量
       </Typography>

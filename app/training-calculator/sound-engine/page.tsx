@@ -105,7 +105,7 @@ export default function SoundEngineTraining() {
       gap={3}
     >
       <div>
-        <Typography variant="h5">音動機育成計算機</Typography>
+        <Typography variant="h6">音動機育成計算機</Typography>
         <Tooltip
           title="音動機のタイプ（撃破、強化・・・）ごとに必要な素材。A（赤）,B（青）,C（緑）"
           arrow
@@ -158,7 +158,7 @@ export default function SoundEngineTraining() {
           selectedRank={selectedRank}
           handleChange={(event) => setSelectedRank(event.target.value)}
         />
-        <Typography variant="h6">必要なディニーの総額</Typography>
+        <Typography variant="subtitle2">必要なディニーの総額</Typography>
         {soundEngineBreakThroughDinnies.map((soundEngineBreakThroughDinnie) => {
           if (soundEngineBreakThroughDinnie.level === selectedLevel) {
             return (
@@ -176,7 +176,7 @@ export default function SoundEngineTraining() {
           }
         })}
 
-        <Typography variant="h6">必要な音動機の突破素材</Typography>
+        <Typography variant="subtitle2">必要な音動機の突破素材</Typography>
         <Typography variant="caption">
           必要な突破素材の数を表示しています
         </Typography>
