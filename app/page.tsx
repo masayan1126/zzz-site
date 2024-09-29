@@ -271,8 +271,8 @@ export default function Home() {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#CD1D1F",
-            color: "white",
+            backgroundColor: "#FFFFFF",
+            color: "#284B7E",
             maxWidth: "300px",
           }}
           onClick={resetConditions}
@@ -283,7 +283,7 @@ export default function Home() {
         <Button
           variant="contained"
           sx={{
-            backgroundColor: "#052C5A",
+            backgroundColor: "#284B7E",
             color: "white",
             maxWidth: "300px",
           }}
@@ -299,6 +299,9 @@ export default function Home() {
       </Typography>
       <Typography variant="caption">
         ・必要な経験値素材（調査員の記録）のB級、C級素材での換算
+      </Typography>
+      <Typography variant="caption">
+        ・スキルレベルを上げるのに必要なチップの数
       </Typography>
     </Box>
   );

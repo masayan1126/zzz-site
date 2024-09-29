@@ -6,8 +6,13 @@ import { ApolloWrapper } from "@/features/auth/ApolloWrapper";
 import MenuAppBar from "@/features/shared/Navbar";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import AnchorTemporaryDrawer from "@/features/shared/AnchorTemporaryDrawer";
+import { Noto_Sans_JP } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const notojp = Noto_Sans_JP({
+  weight: ["400", "500"],
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "ゼンレスゾーンゼロのエージェント育成計算機サイト",
@@ -29,7 +34,7 @@ export default function RootLayout({
       </head>
       <ApolloWrapper>
         <UserProvider>
-          <body className={inter.className}>
+          <body className={notojp.className}>
             <header>
               <AnchorTemporaryDrawer />
             </header>

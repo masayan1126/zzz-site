@@ -21,7 +21,9 @@ export default function CollaborationSkillLevelSelectBox({
   return (
     <>
       <FormControl fullWidth={false}>
-        <InputLabel id="demo-simple-select-label">連携スキルレベル</InputLabel>
+        <InputLabel id="demo-simple-select-label" sx={{ color: "#01488E" }}>
+          連携スキルレベル
+        </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"

@@ -139,6 +139,7 @@ export default function DriverDiskTraining() {
           {needBatteryForDinny}
         </Typography>
         <Typography variant="h5">機能追加予定</Typography>
+        <Typography variant="caption">・ディスク枚の指定</Typography>
         <Typography variant="caption">
           ・A級、B級ドライバディスクの育成に必要な素材の数、ディニー
         </Typography>

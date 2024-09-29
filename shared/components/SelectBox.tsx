@@ -36,27 +36,6 @@ export default function SelectBox({ selectedLevel, handleChange }: Props) {
           <MenuItem value={60}>60</MenuItem>
         </Select>
       </FormControl>
-
-      <FormControl fullWidth={false}>
-        <InputLabel variant="standard" htmlFor="uncontrolled-native">
-          レベル
-        </InputLabel>
-        {/* <NativeSelect
-          defaultValue={selectedLevel}
-          inputProps={{
-            name: "age",
-            id: "uncontrolled-native",
-          }}
-        >
-          <option value="0">0</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="40">40</option>
-          <option value="50">50</option>
-          <option value="60">60</option>
-        </NativeSelect> */}
-      </FormControl>
     </>
   );
 }
