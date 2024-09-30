@@ -112,8 +112,12 @@ export default function DriverDiskTraining() {
         />
         <Typography variant="caption">※現在、S級のみ対応しています</Typography>
 
+        <hr />
+
         <Typography variant="subtitle2">必要なディニーの総額</Typography>
         <span>{needDinnyAmount}</span>
+
+        <hr />
 
         <Typography variant="subtitle2">
           必要な助剤（ドライバディスクの素材）
@@ -126,13 +130,17 @@ export default function DriverDiskTraining() {
           if (driverDiskExperiencePoint.level === selectedLevel) {
             return (
               <div key={driverDiskExperiencePoint.level}>
-                <p>A級助剤：{needDriverDiskExperiencePointAmount.A}個</p>
+                <Typography variant="caption">
+                  A級助剤：{needDriverDiskExperiencePointAmount.A}個
+                </Typography>
                 {/* <p>B級助剤：{needDriverDiskExperiencePointAmount.B}個</p>
                 <p>C級助剤：{needDriverDiskExperiencePointAmount.C}個</p> */}
               </div>
             );
           }
         })}
+
+        <hr />
 
         <Typography variant="caption">
           このディニーを稼ぐために必要なバッテリーの消費量：

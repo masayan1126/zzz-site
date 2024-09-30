@@ -158,6 +158,9 @@ export default function SoundEngineTraining() {
           selectedRank={selectedRank}
           handleChange={(event) => setSelectedRank(event.target.value)}
         />
+
+        <hr />
+
         <Typography variant="subtitle2">必要なディニーの総額</Typography>
         {soundEngineBreakThroughDinnies.map((soundEngineBreakThroughDinnie) => {
           if (soundEngineBreakThroughDinnie.level === selectedLevel) {
@@ -175,6 +178,8 @@ export default function SoundEngineTraining() {
             );
           }
         })}
+
+        <hr />
 
         <Typography variant="subtitle2">必要な音動機の突破素材</Typography>
         <Typography variant="caption">

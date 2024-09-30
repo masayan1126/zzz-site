@@ -236,6 +236,8 @@ export default function Home() {
         }
       />
 
+      <hr />
+
       <DinnyResultSection
         needDinnyAmount={needDinnyAmount}
         needBatteryForDinny={needBatteryForDinny}
@@ -253,6 +255,8 @@ export default function Home() {
           needAgentBreakThroughMaterialAmount
         }
       />
+
+      <hr />
 
       {/* <h3>入手できる場所：</h3> */}
 
