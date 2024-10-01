@@ -11,11 +11,11 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  Tooltip,
+  Grid2,
+  Stack,
   Typography,
 } from "@mui/material";
-import SelectBox from "@/shared/components/SelectBox";
-import InfoIcon from "@mui/icons-material/Info";
+
 import { DinnyCalculator } from "@/features/agent-traning-calculator/dinny-calculator";
 import { AgentBreakThroughMaterialAmountCalculator } from "@/features/agent-traning-calculator/agent-breack-through-material-amount-calculator";
 import useAgentLevel from "@/features/agent-traning-calculator/hooks/useAgentLevel";
@@ -29,6 +29,7 @@ import Link from "next/link";
 import { Link as MuiLink } from "@mui/material";
 import { calcNeedBatteryByDinny } from "@/features/shared/battery-calculator";
 import useBattery from "@/features/shared/hooks/useBattery";
+import TabMenu from "@/shared/components/TabMenu";
 
 export default function Home() {
   const { selectedLevel, setSelectedLevel, handleLevelChange } =
@@ -97,7 +98,9 @@ export default function Home() {
 
   useEffect(() => {
     let skillLevelCondition = undefined;
-
+    // NEXT_PUBLIC_X_NILTO_API_KEY
+    const NEXT_PUBLIC_X_NILTO_API_KEY =
+      process.env.NEXT_PUBLIC_X_NILTO_API_KEY || "";
     if (
       selectedNormalAttackSkillLevel !== 1 ||
       selectedAvoidanceSkillLevel !== 1 ||
@@ -173,140 +176,74 @@ export default function Home() {
       gap={3}
     >
       <div>
-        <Typography variant="h6">エージェント育成計算機</Typography>
+        <Box sx={{ flexGrow: 1, p: 2 }}>
+          <Grid2
+            container
+            sx={{
+              "--Grid-borderWidth": "1px",
+              borderTop: "var(--Grid-borderWidth) solid",
+              borderLeft: "var(--Grid-borderWidth) solid",
+              borderColor: "divider",
+              "& > div": {
+                borderRight: "var(--Grid-borderWidth) solid",
+                borderBottom: "var(--Grid-borderWidth) solid",
+                borderColor: "divider",
+              },
+            }}
+          >
+            {[
+              { caption: "TIPS（準備中）", path: "/tips" },
+              {
+                caption: "エネミー攻略記事（準備中）",
+                path: "/enemy-strategy",
+              },
+              {
+                caption: "エージェント解説（準備中）",
+                path: "/enemy-strategy",
+              },
+              {
+                caption: "高難度タイムアタック（準備中）",
+                path: "/enemy-strategy",
+              },
+              {
+                caption: "エージェント育成計算機",
+                path: "/training-calculator/agent",
+              },
+              {
+                caption: "音動機育成計算機",
+                path: "/training-calculator/sound-engine",
+              },
+              {
+                caption: "ドライバディスク育成計算機",
+                path: "/training-calculator/driver-disk",
+              },
+            ].map((menu, index) => (
+              <Grid2
+                key={index}
+                minHeight={40}
+                size={{
+                  xs: 6,
+                  sm: 4,
+                  md: 3,
+                  lg: 3,
+                }}
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "0 10px 0 10px",
+                }}
+              >
+                <Link href={menu.path}>
+                  <Typography variant="caption">{menu.caption}</Typography>
+                </Link>
+              </Grid2>
+            ))}
+          </Grid2>
+        </Box>
 
-        <div>
-          <Typography variant="caption">
-            シュミレートしたいエージェントのレベルとスキルレベル、コアスキルレベル、突破の有無を選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
-            <br />
-            ※このエージェントのレベルだと、そもそもこのスキルレベルは選択できない、みたいな細かな制御はありませんので、あくまで目安としてご利用ください
-          </Typography>
-        </div>
-        <Tooltip
-          title="エージェントのタイプ（撃破、強化・・・）ごとに必要な素材。A（赤）,B（青）,C（緑）"
-          arrow
-        >
-          <Typography variant="caption">
-            エージェントの突破素材とは
-            <InfoIcon fontSize="small" />
-          </Typography>
-        </Tooltip>
+        {/* <TabMenu /> */}
       </div>
-
-      <div>
-        <SelectBox
-          selectedLevel={selectedLevel}
-          handleChange={handleLevelChange}
-        />
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={isBreakThrough}
-                onChange={(event) =>
-                  handleIsBreakThroughChange(event, selectedLevel)
-                }
-              />
-            }
-            label={
-              <Typography variant="caption">
-                このレベルの突破時に必要な分を含める（※EX.)レベルを20で指定し、このチェックがついてない場合はレベル10突破分が自動的に含まれます）
-              </Typography>
-            }
-          />
-        </FormGroup>
-      </div>
-
-      <SkillLevelChoiceSection
-        selectedCoreSkillLevel={selectedCoreSkillLevel}
-        handleSelectedCoreSkillLevel={handleSelectedCoreSkillLevel}
-        selectedNormalAttackSkillLevel={selectedNormalAttackSkillLevel}
-        handleSelectedNormalAttackSkillLevel={
-          handleSelectedNormalAttackSkillLevel
-        }
-        selectedAvoidanceSkillLevel={selectedAvoidanceSkillLevel}
-        handleSelectedAvoidanceSkillLevel={handleSelectedAvoidanceSkillLevel}
-        selectedSupportSkillLevel={selectedSupportSkillLevel}
-        handleSelectedSupportSkillLevel={handleSelectedSupportSkillLevel}
-        selectedSpecialSkillLevel={selectedSpecialSkillLevel}
-        handleSelectedSpecialSkillLevel={handleSelectedSpecialSkillLevel}
-        selectedCollaborationSkillLevel={selectedCollaborationSkillLevel}
-        handleSelectedCollaborationSkillLevel={
-          handleSelectedCollaborationSkillLevel
-        }
-      />
-
-      <hr />
-
-      <DinnyResultSection
-        needDinnyAmount={needDinnyAmount}
-        needBatteryForDinny={needBatteryForDinny}
-        isBreakThrough={isBreakThrough}
-        selectedLevel={selectedLevel}
-      />
-
-      <AgentExperiencePointAmountResultSection selectedLevel={selectedLevel} />
-
-      <hr />
-
-      <AgentBreakThroughMaterialAmountResultSection
-        selectedLevel={selectedLevel}
-        needAgentBreakThroughMaterialAmount={
-          needAgentBreakThroughMaterialAmount
-        }
-      />
-
-      <hr />
-
-      {/* <h3>入手できる場所：</h3> */}
-
-      {/* <Typography variant="subtitle2">育成予備知識</Typography>
-
-        <Typography variant="caption">
-          ・ディニーは突破時（突破時のみ必要。レベル上げてる時は不要）とコアスキル上げる時に必要
-        </Typography> */}
-
-      {/* スタミナ100でディニーは125,000 */}
-      {/* スタミナ60でディニーは75,000 */}
-      {/* スタミナ1につき、1,250 */}
-
-      {/* UsefulButtonSection */}
-      <div className="flex gap-3 justify-start">
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#FFFFFF",
-            color: "#284B7E",
-            maxWidth: "300px",
-          }}
-          onClick={resetConditions}
-        >
-          条件リセット
-        </Button>
-
-        <Button
-          variant="contained"
-          sx={{
-            backgroundColor: "#284B7E",
-            color: "white",
-            maxWidth: "300px",
-          }}
-          onClick={maxConditions}
-        >
-          全てMAXで指定
-        </Button>
-      </div>
-
-      <Typography variant="subtitle2">機能追加予定</Typography>
-      <Typography variant="caption">
-        ・必要なキャラのエキスパート素材、週ボス素材。必要なバッテリーの消費量
-      </Typography>
-      <Typography variant="caption">
-        ・必要な経験値素材（調査員の記録）のB級、C級素材での換算
-      </Typography>
-      <Typography variant="caption">
-        ・スキルレベルを上げるのに必要なチップの数
-      </Typography>
     </Box>
   );
 }

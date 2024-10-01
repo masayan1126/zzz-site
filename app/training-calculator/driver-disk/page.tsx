@@ -71,87 +71,95 @@ export default function DriverDiskTraining() {
   ]);
 
   return (
-    <Box
-      display="flex"
-      justifyContent="left"
-      alignItems="left"
-      flexDirection="column"
-      gap={3}
+    <div
+      style={{
+        padding: "40px 30px",
+      }}
     >
-      <div>
-        <Typography variant="h6">ドライバディスク育成計算機</Typography>
-        <div>
-          <Typography variant="caption">
-            シュミレートしたいドライバディスクのレベルとランクを選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
-          </Typography>
-        </div>
-      </div>
-
       <Box
-        sx={{
-          display: "flex",
-          justifyContent: "left",
-          alignItems: "left",
-          flexDirection: {
-            xs: "column", // Extra-small screens (default)
-            sm: "column", // Small screens
-            md: "column", // Medium screens and up
-          },
-          gap: 3,
-        }}
+        display="flex"
+        justifyContent="left"
+        alignItems="left"
+        flexDirection="column"
+        gap={3}
       >
         <div>
-          <DriverDiskLevelSelectBox
-            selectedLevel={selectedLevel}
-            handleChange={handleLevelChange}
-          />
+          <Typography variant="h6">ドライバディスク育成計算機</Typography>
+          <div>
+            <Typography variant="caption">
+              シュミレートしたいドライバディスクのレベルとランクを選択すると、必要なディニーの金額とスタミナ、各種素材の数が計算できます
+            </Typography>
+          </div>
         </div>
-        <DriverDiskRankSelectBox
-          selectedRank={selectedRank}
-          handleChange={(event) => setSelectedRank(event.target.value)}
-        />
-        <Typography variant="caption">※現在、S級のみ対応しています</Typography>
 
-        <hr />
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "left",
+            alignItems: "left",
+            flexDirection: {
+              xs: "column", // Extra-small screens (default)
+              sm: "column", // Small screens
+              md: "column", // Medium screens and up
+            },
+            gap: 3,
+          }}
+        >
+          <div>
+            <DriverDiskLevelSelectBox
+              selectedLevel={selectedLevel}
+              handleChange={handleLevelChange}
+            />
+          </div>
+          <DriverDiskRankSelectBox
+            selectedRank={selectedRank}
+            handleChange={(event) => setSelectedRank(event.target.value)}
+          />
+          <Typography variant="caption">
+            ※現在、S級のみ対応しています
+          </Typography>
 
-        <Typography variant="subtitle2">必要なディニーの総額</Typography>
-        <span>{needDinnyAmount}</span>
+          <hr />
 
-        <hr />
+          <Typography variant="subtitle2">必要なディニーの総額</Typography>
+          <span>{needDinnyAmount}</span>
 
-        <Typography variant="subtitle2">
-          必要な助剤（ドライバディスクの素材）
-        </Typography>
-        <Typography variant="caption">
-          必要な素材の数を表示しています
-        </Typography>
+          <hr />
 
-        {driverDiskExperiencePoints.map((driverDiskExperiencePoint) => {
-          if (driverDiskExperiencePoint.level === selectedLevel) {
-            return (
-              <div key={driverDiskExperiencePoint.level}>
-                <Typography variant="caption">
-                  A級助剤：{needDriverDiskExperiencePointAmount.A}個
-                </Typography>
-                {/* <p>B級助剤：{needDriverDiskExperiencePointAmount.B}個</p>
+          <Typography variant="subtitle2">
+            必要な助剤（ドライバディスクの素材）
+          </Typography>
+          <Typography variant="caption">
+            必要な素材の数を表示しています
+          </Typography>
+
+          {driverDiskExperiencePoints.map((driverDiskExperiencePoint) => {
+            if (driverDiskExperiencePoint.level === selectedLevel) {
+              return (
+                <div key={driverDiskExperiencePoint.level}>
+                  <Typography variant="caption">
+                    A級助剤：{needDriverDiskExperiencePointAmount.A}個
+                  </Typography>
+                  {/* <p>B級助剤：{needDriverDiskExperiencePointAmount.B}個</p>
                 <p>C級助剤：{needDriverDiskExperiencePointAmount.C}個</p> */}
-              </div>
-            );
-          }
-        })}
+                </div>
+              );
+            }
+          })}
 
-        <hr />
+          <hr />
 
-        <Typography variant="caption">
-          このディニーを稼ぐために必要なバッテリーの消費量：
-          {needBatteryForDinny}
-        </Typography>
-        <Typography variant="subtitle2">機能追加予定</Typography>
-        <Typography variant="caption">・ディスク枚の指定</Typography>
-        <Typography variant="caption">
-          ・A級、B級ドライバディスクの育成に必要な素材の数、ディニー
-        </Typography>
+          <Typography variant="caption">
+            このディニーを稼ぐために必要なバッテリーの消費量：
+            {needBatteryForDinny}
+          </Typography>
+          <Typography variant="subtitle2">機能追加予定</Typography>
+          <Typography variant="caption">・ディスク枚の指定</Typography>
+          <Typography variant="caption">
+            ・A級、B級ドライバディスクの育成に必要な素材の数、ディニー
+          </Typography>
+        </Box>
       </Box>
-    </Box>
+    </div>
   );
 }

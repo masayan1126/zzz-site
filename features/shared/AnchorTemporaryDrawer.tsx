@@ -45,7 +45,7 @@ const AnchorTemporaryDrawer = () => {
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
           <Typography variant="caption">
-            ZZZ / ゼンレスゾーンゼロ / ゼンゼロ 攻略サイト
+            <Link href="/">ZZZ / ゼンレスゾーンゼロ / ゼンゼロ 攻略サイト</Link>
           </Typography>
           <IconButton
             edge="start"
@@ -60,7 +60,11 @@ const AnchorTemporaryDrawer = () => {
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
         <List component="div">
           <ListItem onClick={toggleDrawer(false)}>
-            <MuiLink component={Link} href="/" underline="none">
+            <MuiLink
+              component={Link}
+              href="/training-calculator/agent"
+              underline="none"
+            >
               <ListItemText
                 primary="エージェント育成計算機"
                 primaryTypographyProps={{ fontSize: "0.75rem" }}
