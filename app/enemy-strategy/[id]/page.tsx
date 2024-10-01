@@ -6,6 +6,11 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
+type Article = {
+  _title: string;
+  content: string;
+};
+
 export default function EnemyStrategyDetail({
   params,
 }: {
@@ -13,7 +18,7 @@ export default function EnemyStrategyDetail({
 }) {
   const { id } = params;
 
-  const [article, setArticle] = useState(undefined);
+  const [article, setArticle] = useState<Article>();
   useEffect(() => {
     (async () => {
       const myHeaders = new Headers();
@@ -29,6 +34,7 @@ export default function EnemyStrategyDetail({
         }
       );
       const data = await response.json();
+      console.log(data);
       setArticle(data);
     })();
   }, [id]);
