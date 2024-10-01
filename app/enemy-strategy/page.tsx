@@ -38,16 +38,18 @@ export default function EnemyStrategyList() {
   const [articles, setArticles] = useState<[]>([]);
   useEffect(() => {
     (async () => {
+      const myHeaders = new Headers();
+      myHeaders.append(
+        "X-NILTO-API-KEY",
+        process.env.NEXT_PUBLIC_X_NILTO_API_KEY ?? ""
+      );
       const response = await fetch(
         "https://cms-api.nilto.com/v1/contents/?model=enemy_strategy_article",
         {
-          headers: {
-            "X-NILTO-API-KEY": process.env.NEXT_PUBLIC_X_NILTO_API_KEY,
-          },
+          headers: myHeaders,
         }
       );
       const data = await response.json();
-      console.log(data.data);
       setArticles(data.data);
     })();
   }, []);

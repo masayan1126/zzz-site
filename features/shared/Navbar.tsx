@@ -24,7 +24,6 @@ export default function MenuAppBar() {
   };
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-    console.log("aaa!");
     setAnchorEl(event.currentTarget);
   };
 
