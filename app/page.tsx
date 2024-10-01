@@ -29,7 +29,6 @@ import Link from "next/link";
 import { Link as MuiLink } from "@mui/material";
 import { calcNeedBatteryByDinny } from "@/features/shared/battery-calculator";
 import useBattery from "@/features/shared/hooks/useBattery";
-import TabMenu from "@/shared/components/TabMenu";
 
 export default function Home() {
   const { selectedLevel, setSelectedLevel, handleLevelChange } =
