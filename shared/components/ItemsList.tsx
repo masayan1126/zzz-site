@@ -20,8 +20,8 @@ export default function AlignItemsList({ articles }: Props) {
           <ListItem alignItems="flex-start">
             <ListItemAvatar>
               <Avatar
-                alt={article.block_1.media_1.alt}
-                src={article.block_1.media_1.url}
+                alt={article.enemy_info.media_1.alt}
+                src={article.enemy_info.media_1.url}
               />
             </ListItemAvatar>
             <ListItemText

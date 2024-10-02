@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Noto_Sans_Gothic } from "next/font/google";
 import "./globals.css";
 import { UserProvider } from "@/features/auth/UserProvider";
 import { ApolloWrapper } from "@/features/auth/ApolloWrapper";
 import MenuAppBar from "@/features/shared/Navbar";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import AnchorTemporaryDrawer from "@/features/shared/AnchorTemporaryDrawer";
-import { Noto_Sans_JP } from "next/font/google";
 
-const notojp = Noto_Sans_JP({
-  weight: ["400", "500"],
+const notojp = Noto_Sans_Gothic({
+  weight: ["400", "400"],
   subsets: ["latin"],
   display: "swap",
 });
