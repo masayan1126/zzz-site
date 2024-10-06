@@ -177,8 +177,11 @@ export default function Home() {
         alignItems="left"
         flexDirection="column"
         gap={3}
+        maxWidth="850px"
+        margin="auto"
       >
         <div>
+          <img className="mb-2" src="/agent.png" alt="" />
           <Typography variant="h6">エージェント育成計算機</Typography>
 
           <div>

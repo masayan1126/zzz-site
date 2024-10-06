@@ -173,9 +173,12 @@ export default function Home() {
       alignItems="left"
       flexDirection="column"
       gap={3}
+      maxWidth="850px"
+      margin="auto"
     >
       <div>
         <Box sx={{ flexGrow: 1, p: 2 }}>
+          <img className="mb-2" src="/hero.png" alt="" />
           <Grid2
             container
             sx={{

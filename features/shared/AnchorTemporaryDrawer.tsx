@@ -13,6 +13,7 @@ import {
   ListItemText,
   Box,
   ListItemButton,
+  Grid2,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { Link as MuiLink } from "@mui/material";
@@ -39,22 +40,62 @@ const AnchorTemporaryDrawer = () => {
         position="static"
         sx={{
           backgroundColor: "#284B7E",
-          paddingLeft: "15px",
+
           //   opacity: 0.9,
         }}
+        // paddingLeft={{ xs: "15px" }}
       >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Toolbar
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            maxWidth: "1200px", // Set the maximum width
+            margin: "0 auto",
+          }}
+        >
           <Typography variant="caption">
-            <Link href="/">ZZZ / ゼンレスゾーンゼロ / ゼンゼロ 攻略サイト</Link>
+            <Link href="/">
+              <Box
+                sx={{
+                  flexGrow: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                }}
+              >
+                <Typography
+                  //   variant="caption"
+                  width={{
+                    lg: 20,
+                    md: 20,
+                    sm: 15,
+                    xs: 16,
+                  }}
+                >
+                  <img style={{ width: "100%" }} src="/zzzlogo.png" alt="" />
+                </Typography>
+                <Typography
+                  //   variant="caption"
+                  fontSize={{
+                    lg: 17,
+                    md: 17,
+                    sm: 15,
+                    xs: 13,
+                  }}
+                >
+                  ゼンレスゾーンゼロ 攻略サイト
+                </Typography>
+              </Box>
+            </Link>
           </Typography>
-          <IconButton
+          {/* <IconButton
             edge="start"
             color="inherit"
             aria-label="menu"
             onClick={toggleDrawer(true)}
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
         </Toolbar>
       </AppBar>
       <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
